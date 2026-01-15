@@ -15,7 +15,8 @@ export default function HomePage() {
       </div>
       <a
         href="mailto:christo@8020films.com"
-        className="mb-[35px] text-white hover:text-white/70 transition-colors tracking-widest text-xl"
+        className="mb-[35px] text-white hover:text-white/70 transition-colors tracking-widest"
+        style={{ fontSize: '1.25rem' }}
       >
         contact me
       </a>
