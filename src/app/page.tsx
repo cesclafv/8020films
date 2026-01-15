@@ -18,7 +18,7 @@ export default function HomePage() {
         className="mb-[35px] text-white hover:text-white/70 transition-colors tracking-widest"
         style={{ fontSize: '1.25rem' }}
       >
-        contact me
+        contact us
       </a>
     </main>
   );
