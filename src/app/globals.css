@@ -1,10 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000;
+  --color-foreground: #fff;
+}
 
 @layer base {
   body {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 }

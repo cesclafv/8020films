@@ -15,9 +15,9 @@ export default function HomePage() {
       </div>
       <a
         href="mailto:christo@8020films.com"
-        className="mb-[35px] text-slate-400 hover:text-slate-300 transition-colors text-sm tracking-wide"
+        className="mb-[35px] text-white hover:text-white/70 transition-colors tracking-widest text-xl"
       >
-        contact
+        contact me
       </a>
     </main>
   );
