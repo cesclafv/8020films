@@ -121,12 +121,6 @@ export default async function WorkReferencePage({ params }: Props) {
               <span className="text-[#6b7280] block mb-1">{t('client')}</span>
               <span className="font-semibold">{workReference.client_name}</span>
             </div>
-            {workReference.year && (
-              <div>
-                <span className="text-[#6b7280] block mb-1">{t('year')}</span>
-                <span className="font-semibold">{workReference.year}</span>
-              </div>
-            )}
             <div>
               <span className="text-[#6b7280] block mb-1">{t('category')}</span>
               <span className="font-semibold">

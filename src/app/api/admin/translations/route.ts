@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error saving translations:', error);
     return NextResponse.json(
-      { error: 'Failed to save translations' },
+      { error: 'Failed to save translations - make sure to edit on localhost and rebuild' },
       { status: 500 }
     );
   }

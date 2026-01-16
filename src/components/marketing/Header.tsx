@@ -108,36 +108,67 @@ export function Header() {
             />
           </div>
         </button>
-
-        {/* Mobile Menu */}
-        <div
-          className={cn(
-            'fixed inset-0 z-[60] bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 transition-opacity duration-300 md:hidden',
-            isMobileMenuOpen
-              ? 'opacity-100 pointer-events-auto'
-              : 'opacity-0 pointer-events-none'
-          )}
-        >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-white text-2xl font-bold uppercase tracking-wider"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href={pathname}
-            locale={toggleLocale}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="text-white/60 text-lg font-semibold uppercase tracking-wider mt-4 pt-4 border-t border-white/20"
-          >
-            {toggleLocale === 'en' ? 'English' : 'Français'}
-          </Link>
-        </div>
       </div>
+
+      {/* Mobile Menu - Outside container for proper fixed positioning */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 md:hidden"
+          style={{ minHeight: '100vh', minWidth: '100vw' }}
+        >
+          {/* Close button and logo header */}
+          <div className="absolute top-0 left-0 right-0 px-6 py-6 flex items-center justify-between">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+              <Image
+                src="/img/logo-8020Films-horizontal_white_1000px.png"
+                alt="8020 Films"
+                width={140}
+                height={40}
+                className="h-8 w-auto"
+              />
+            </Link>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-2"
+              aria-label="Close menu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-white text-2xl font-bold uppercase tracking-wider"
+          >
+            {link.label}
+          </Link>
+        ))}
+        <Link
+          href={pathname}
+          locale={toggleLocale}
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="text-white/60 text-lg font-semibold uppercase tracking-wider mt-4 pt-4 border-t border-white/20"
+        >
+          {toggleLocale === 'en' ? 'English' : 'Français'}
+        </Link>
+        </div>
+      )}
     </header>
   );
 }

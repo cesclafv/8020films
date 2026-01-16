@@ -24,46 +24,49 @@ export function WorkGridSectionClient({ workReferences, locale }: Props) {
           {t('subtitle')}
         </p>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {workReferences.map((project, index) => (
-            <Link
-              key={project.id}
-              href={`/work/${project.slug}`}
-              className={`work-item ${index >= 5 ? 'hidden md:block' : ''}`}
-            >
-              {project.featured_image_url ? (
-                <Image
-                  src={project.featured_image_url}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              ) : (
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(135deg,
-                      hsl(${(index * 40) % 360}, 30%, 25%) 0%,
-                      hsl(${(index * 40 + 60) % 360}, 40%, 15%) 100%)`,
-                  }}
-                />
-              )}
-              <div className="work-item-overlay">
-                <span className="text-white/70 text-xs uppercase tracking-wider mb-1">
-                  {project.client_name}
-                </span>
-                <h3 className="text-white font-bold text-lg">{project.title}</h3>
-                <span className="text-white/60 text-sm mt-1">
-                  {project.categories
-                    .slice(0, 1)
-                    .map((cat) => (locale === 'fr' ? cat.name_fr : cat.name_en))
-                    .join(', ')}
-                </span>
-              </div>
-            </Link>
-          ))}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {workReferences.slice(0, 9).map((project, index) => {
+            // First item is large (spans 2 cols and 2 rows on desktop)
+            const isLarge = index === 0;
+
+            return (
+              <Link
+                key={project.id}
+                href={`/work/${project.slug}`}
+                className={`work-item rounded-xl ${
+                  isLarge
+                    ? 'md:col-span-2 md:row-span-2'
+                    : ''
+                } ${index >= 3 ? 'hidden md:block' : ''}`}
+              >
+                {project.featured_image_url ? (
+                  <Image
+                    src={project.featured_image_url}
+                    alt={project.title}
+                    fill
+                    className="object-cover rounded-xl"
+                    sizes={isLarge
+                      ? "(max-width: 768px) 100vw, 66vw"
+                      : "(max-width: 768px) 100vw, 33vw"
+                    }
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0 rounded-xl"
+                    style={{
+                      background: `linear-gradient(135deg,
+                        hsl(${(index * 40) % 360}, 30%, 25%) 0%,
+                        hsl(${(index * 40 + 60) % 360}, 40%, 15%) 100%)`,
+                    }}
+                  />
+                )}
+                <div className="work-item-overlay rounded-xl">
+                  <h3 className="text-white font-bold text-lg">{project.title}</h3>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         {/* View All Button */}
