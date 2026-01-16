@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const LOGOS = [
@@ -35,7 +35,11 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function LogoBannerSection() {
-  const shuffledLogos = useMemo(() => shuffleArray(LOGOS), []);
+  const [shuffledLogos, setShuffledLogos] = useState(LOGOS);
+
+  useEffect(() => {
+    setShuffledLogos(shuffleArray(LOGOS));
+  }, []);
 
   return (
     <section className="py-16 bg-white overflow-hidden">
