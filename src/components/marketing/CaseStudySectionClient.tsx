@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
@@ -51,13 +51,24 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
     : caseStudy.images;
 
   const [scrollIndex, setScrollIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const visibleCount = 3;
   const maxIndex = Math.max(0, allThumbnailImages.length - visibleCount);
 
-  const scrollUp = () => setScrollIndex((prev) => Math.max(0, prev - 1));
-  const scrollDown = () => setScrollIndex((prev) => Math.min(maxIndex, prev + 1));
+  const scrollToIndex = (index: number) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const imageHeight = container.scrollHeight / allThumbnailImages.length;
+      container.scrollTo({
+        top: index * imageHeight,
+        behavior: 'smooth',
+      });
+    }
+    setScrollIndex(index);
+  };
 
-  const visibleImages = allThumbnailImages.slice(scrollIndex, scrollIndex + visibleCount);
+  const scrollUp = () => scrollToIndex(Math.max(0, scrollIndex - 1));
+  const scrollDown = () => scrollToIndex(Math.min(maxIndex, scrollIndex + 1));
 
   // Lightbox state
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -81,7 +92,7 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
         </h2>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-stretch">
           {/* Left column: Content (2/3 width) */}
           <div className="lg:col-span-2">
             {/* Hero Video or Image */}
@@ -140,89 +151,101 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
 
           {/* Right column: Thumbnail images with scroll arrows (hidden on mobile) */}
           {allThumbnailImages.length > 0 && (
-            <div className="hidden lg:flex flex-col gap-4">
+            <div className="hidden lg:flex flex-col h-full">
               {/* Up Arrow - only show after scrolling down */}
-              {scrollIndex > 0 && (
-                <button
-                  onClick={scrollUp}
-                  className="self-center p-2 opacity-70 hover:opacity-100 transition-opacity"
-                  aria-label="Scroll up"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+              {scrollIndex > 0 ? (
+                <div className="h-10 flex items-center justify-center flex-shrink-0">
+                  <button
+                    onClick={scrollUp}
+                    className="p-2 opacity-70 hover:opacity-100 transition-opacity"
+                    aria-label="Scroll up"
                   >
-                    <path d="M18 15l-6-6-6 6" />
-                  </svg>
-                </button>
-              )}
-
-              {/* Images */}
-              {visibleImages.map((image, index) => (
-                <button
-                  key={scrollIndex + index}
-                  onClick={() => openLightbox(scrollIndex + index)}
-                  className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer"
-                >
-                  <Image
-                    src={image.url}
-                    alt={image.alt || caseStudy.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
+                      width="24"
+                      height="24"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="white"
+                      stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <circle cx="11" cy="11" r="8" />
-                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                      <line x1="11" y1="8" x2="11" y2="14" />
-                      <line x1="8" y1="11" x2="14" y2="11" />
+                      <path d="M18 15l-6-6-6 6" />
                     </svg>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                </div>
+              ) : (
+                <div className="h-10 flex-shrink-0" />
+              )}
+
+              {/* Scrollable Images Container */}
+              <div
+                ref={scrollContainerRef}
+                className="flex flex-col gap-4 overflow-hidden flex-1"
+              >
+                {allThumbnailImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => openLightbox(index)}
+                    className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer flex-shrink-0"
+                  >
+                    <Image
+                      src={image.url}
+                      alt={image.alt || caseStudy.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="33vw"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                      </svg>
+                    </div>
+                  </button>
+                ))}
+              </div>
 
               {/* Down Arrow */}
-              <button
-                onClick={scrollDown}
-                disabled={scrollIndex >= maxIndex}
-                className={`self-center p-2 transition-opacity ${
-                  scrollIndex >= maxIndex ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100'
-                }`}
-                aria-label="Scroll down"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              </button>
+              {scrollIndex < maxIndex ? (
+                <div className="h-10 flex items-center justify-center flex-shrink-0">
+                  <button
+                    onClick={scrollDown}
+                    className="p-2 opacity-70 hover:opacity-100 transition-opacity"
+                    aria-label="Scroll down"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <div className="h-10 flex-shrink-0" />
+              )}
             </div>
           )}
         </div>

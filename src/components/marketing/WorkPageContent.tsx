@@ -49,8 +49,8 @@ export function WorkPageContent({
           className={cn(
             'px-5 py-2 text-sm font-semibold uppercase tracking-wider transition-all border-2',
             activeFilter === null
-              ? 'bg-[#1a1a1a] text-white border-[#1a1a1a]'
-              : 'bg-transparent text-[#1a1a1a] border-[#e5e7eb] hover:border-[#1a1a1a]'
+              ? 'bg-[#ff6b6b] text-white border-[#ff6b6b]'
+              : 'bg-transparent text-[#1a1a1a] border-[#e5e7eb] hover:border-[#ff6b6b]'
           )}
         >
           {t('allFilter')}
@@ -62,8 +62,8 @@ export function WorkPageContent({
             className={cn(
               'px-5 py-2 text-sm font-semibold uppercase tracking-wider transition-all border-2',
               activeFilter === category.slug
-                ? 'bg-[#1a1a1a] text-white border-[#1a1a1a]'
-                : 'bg-transparent text-[#1a1a1a] border-[#e5e7eb] hover:border-[#1a1a1a]'
+                ? 'bg-[#ff6b6b] text-white border-[#ff6b6b]'
+                : 'bg-transparent text-[#1a1a1a] border-[#e5e7eb] hover:border-[#ff6b6b]'
             )}
           >
             {getCategoryName(category)}
