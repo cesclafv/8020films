@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from 'react';
 
-type TranslationValue = string | Record<string, TranslationValue>;
-type TranslationSection = Record<string, TranslationValue>;
-type Translations = Record<string, TranslationSection>;
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type TranslationData = Record<string, any>;
 
-export default function TranslationsPage() {
-  const [translations, setTranslations] = useState<{ en: Translations; fr: Translations } | null>(null);
+export default function TranslationDataPage() {
+  const [translations, setTranslationData] = useState<{ en: TranslationData; fr: TranslationData } | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,15 +14,15 @@ export default function TranslationsPage() {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    fetchTranslations();
+    fetchTranslationData();
   }, []);
 
-  const fetchTranslations = async () => {
+  const fetchTranslationData = async () => {
     try {
       const res = await fetch('/api/admin/translations');
       if (!res.ok) throw new Error('Failed to fetch translations');
       const data = await res.json();
-      setTranslations(data);
+      setTranslationData(data);
       // Expand all top-level sections by default
       setExpandedSections(new Set(Object.keys(data.en)));
     } catch (err) {
@@ -63,15 +62,15 @@ export default function TranslationsPage() {
   ) => {
     if (!translations) return;
 
-    const newTranslations = { ...translations };
-    let current: Record<string, unknown> = newTranslations[lang];
+    const newTranslationData = { ...translations };
+    let current: Record<string, unknown> = newTranslationData[lang];
 
     for (let i = 0; i < path.length - 1; i++) {
       current = current[path[i]] as Record<string, unknown>;
     }
 
     current[path[path.length - 1]] = value;
-    setTranslations(newTranslations as { en: Translations; fr: Translations });
+    setTranslationData(newTranslationData as { en: TranslationData; fr: TranslationData });
   };
 
   const toggleSection = (section: string) => {
@@ -141,16 +140,16 @@ export default function TranslationsPage() {
 
   const renderSection = (
     sectionKey: string,
-    enSection: TranslationSection,
-    frSection: TranslationSection,
+    enSection: TranslationData,
+    frSection: TranslationData,
     parentPath: string[] = []
   ) => {
     const currentPath = [...parentPath, sectionKey];
     const isExpanded = expandedSections.has(currentPath.join('.')) || parentPath.length > 0;
 
     const renderContent = (
-      enObj: TranslationValue,
-      frObj: TranslationValue,
+      enObj: TranslationData,
+      frObj: TranslationData,
       path: string[],
       key: string
     ): React.ReactNode => {
@@ -167,8 +166,8 @@ export default function TranslationsPage() {
             <div className="pl-4 border-l-2 border-gray-200">
               {Object.keys(enObj).map((subKey) =>
                 renderContent(
-                  (enObj as Record<string, TranslationValue>)[subKey],
-                  (frObj as Record<string, TranslationValue>)[subKey],
+                  (enObj as Record<string, TranslationData>)[subKey],
+                  (frObj as Record<string, TranslationData>)[subKey],
                   [...path, subKey],
                   subKey
                 )
@@ -239,7 +238,7 @@ export default function TranslationsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">Translations</h1>
+          <h1 className="text-2xl font-bold">TranslationData</h1>
           <p className="text-gray-600 mt-1">Edit website text for English and French</p>
         </div>
         <button
@@ -266,7 +265,7 @@ export default function TranslationsPage() {
 
       {success && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
-          Translations saved successfully!
+          TranslationData saved successfully!
         </div>
       )}
 
@@ -274,8 +273,8 @@ export default function TranslationsPage() {
         {Object.keys(translations.en).map((sectionKey) =>
           renderSection(
             sectionKey,
-            translations.en[sectionKey] as TranslationSection,
-            translations.fr[sectionKey] as TranslationSection
+            translations.en[sectionKey] as TranslationData,
+            translations.fr[sectionKey] as TranslationData
           )
         )}
       </div>
