@@ -71,6 +71,11 @@ export async function getWorkReferences(
     );
   }
 
+  // If no results for this locale, fall back to English
+  if (results.length === 0 && locale !== 'en') {
+    return getWorkReferences('en', categorySlug);
+  }
+
   return results;
 }
 
@@ -93,7 +98,14 @@ export async function getHomepageWorkReferences(
     return [];
   }
 
-  return data || [];
+  const results = data || [];
+
+  // If no results for this locale, fall back to English
+  if (results.length === 0 && locale !== 'en') {
+    return getHomepageWorkReferences('en');
+  }
+
+  return results;
 }
 
 // Fetch featured case study
@@ -108,11 +120,16 @@ export async function getFeaturedCaseStudy(
     .eq('locale', locale)
     .eq('is_case_study', true)
     .limit(1)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error fetching case study:', error);
     return null;
+  }
+
+  // If no case study for this locale, try falling back to English
+  if (!data && locale !== 'en') {
+    return getFeaturedCaseStudy('en');
   }
 
   return data;
@@ -130,11 +147,16 @@ export async function getWorkReferenceBySlug(
     .select('*')
     .eq('slug', slug)
     .eq('locale', locale)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error fetching work reference:', error);
     return null;
+  }
+
+  // If no translation for this locale, fall back to English
+  if (!data && locale !== 'en') {
+    return getWorkReferenceBySlug(slug, 'en');
   }
 
   return data;

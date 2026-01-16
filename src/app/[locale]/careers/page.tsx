@@ -27,21 +27,22 @@ export default async function CareersPage({ params }: Props) {
       <Header />
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
-            {/* Header */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-              {t('title')}
-            </h1>
+          {/* Title - Full width */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-12 tracking-tight">
+            {t('title')}
+          </h1>
 
-            {/* Intro */}
-            <div className="text-lg text-[#6b7280] space-y-6 mb-12">
+          {/* Two-column layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
+            {/* Left column: Intro */}
+            <div className="text-lg text-[#6b7280] space-y-6">
               <p>{t('intro1')}</p>
               <p>{t('intro2')}</p>
               <p>{t('intro3')}</p>
             </div>
 
-            {/* What We Look For */}
-            <div className="mb-12">
+            {/* Right column: What We Look For */}
+            <div>
               <h2 className="text-2xl font-bold mb-6">{t('lookingForTitle')}</h2>
               <ul className="space-y-4 text-[#6b7280]">
                 <li className="flex items-start">
@@ -62,18 +63,18 @@ export default async function CareersPage({ params }: Props) {
                 </li>
               </ul>
             </div>
+          </div>
 
-            {/* Contact */}
-            <div className="bg-[#f8f9fa] p-8 rounded-lg">
-              <h2 className="text-2xl font-bold mb-4">{t('contactTitle')}</h2>
-              <p className="text-[#6b7280] mb-6">{t('contactDescription')}</p>
-              <a
-                href="mailto:hello@8020films.com?subject=Career%20Inquiry"
-                className="btn btn-primary"
-              >
-                {t('contactButton')}
-              </a>
-            </div>
+          {/* Contact - Centered */}
+          <div className="bg-[#f8f9fa] p-8 rounded-lg max-w-xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4">{t('contactTitle')}</h2>
+            <p className="text-[#6b7280] mb-6">{t('contactDescription')}</p>
+            <a
+              href="mailto:hello@8020films.com?subject=Career%20Inquiry"
+              className="btn btn-primary"
+            >
+              {t('contactButton')}
+            </a>
           </div>
         </div>
       </main>

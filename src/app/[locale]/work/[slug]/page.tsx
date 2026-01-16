@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/marketing';
+import { ImageGallery } from '@/components/marketing/ImageGallery';
 import { Link } from '@/i18n/navigation';
 import { getWorkReferenceBySlug, getAllWorkReferenceSlugs } from '@/lib/supabase/queries';
 
@@ -155,6 +156,13 @@ export default async function WorkReferencePage({ params }: Props) {
               dangerouslySetInnerHTML={{ __html: workReference.body_html }}
             />
           )}
+
+          {/* Gallery Images */}
+          <ImageGallery
+            images={workReference.images}
+            title={workReference.title}
+            galleryLabel={t('gallery')}
+          />
 
           {/* CTA */}
           <div className="border-t border-[#e5e7eb] pt-12 mt-12">

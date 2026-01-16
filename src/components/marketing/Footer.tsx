@@ -93,12 +93,12 @@ export function Footer() {
               >
                 {t('contactUs')}
               </Link>
-              <Link
-                href="/admin"
+              <a
+                href="/admin/login"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 {t('login')}
-              </Link>
+              </a>
             </div>
           </div>
 

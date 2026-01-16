@@ -7,16 +7,43 @@ export function QuoteFormSection() {
   const t = useTranslations('HomePage.quote');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    // TODO: Implement form submission with Supabase + reCAPTCHA
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      company: formData.get('company') as string,
+      first_name: formData.get('firstName') as string,
+      last_name: formData.get('lastName') as string,
+      email: formData.get('email') as string,
+      job_title: formData.get('jobTitle') as string,
+      project_type: formData.get('projectType') as string,
+      budget_range: formData.get('budget') as string,
+      message: formData.get('message') as string,
+      how_heard: formData.get('howHeard') as string,
+    };
 
-    setIsSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
+
+      setIsSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please try again or email us directly at hello@8020films.com');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -45,6 +72,11 @@ export function QuoteFormSection() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
+          {error && (
+            <div className="p-4 bg-red-500/20 border border-red-500/40 text-red-200 rounded">
+              {error}
+            </div>
+          )}
           {/* Row 1: Company & Work Email */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>

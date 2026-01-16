@@ -17,9 +17,12 @@ export function WorkGridSectionClient({ workReferences, locale }: Props) {
     <section className="py-20 md:py-28 bg-white">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-16 md:mb-20 tracking-tight">
+        <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight">
           {t('title')}
         </h2>
+        <p className="text-lg md:text-xl text-[#6b7280] mb-16 md:mb-20 max-w-2xl">
+          {t('subtitle')}
+        </p>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

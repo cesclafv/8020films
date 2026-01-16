@@ -48,7 +48,7 @@ export function QuotePageContent() {
 
   if (isSubmitted) {
     return (
-      <div className="max-w-4xl mx-auto text-center py-16">
+      <div className="py-8">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
           {t('successTitle')}
         </h2>
@@ -58,7 +58,7 @@ export function QuotePageContent() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div>
       {error && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded">
           {error}
@@ -200,8 +200,8 @@ export function QuotePageContent() {
           />
         </div>
 
-        {/* Submit Button - Centered */}
-        <div className="pt-4 text-center">
+        {/* Submit Button */}
+        <div className="pt-4">
           <button
             type="submit"
             disabled={isSubmitting}

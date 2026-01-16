@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "8020 Films | Société de Production Vidéo",
-    "description": "Basés à Paris, Londres et Los Angeles. Production vidéo haut de gamme pour les agences et marques les plus renommées au monde."
+    "description": "Basé à Paris, Londres et Los Angeles. Production vidéo pour les agences et marques les plus renommées au monde."
   },
   "Navigation": {
     "work": "Projets",
@@ -21,11 +21,12 @@
   },
   "HomePage": {
     "hero": {
-      "description": "Basés à Paris, Londres et Los Angeles, nous pouvons vous accompagner dans vos productions vidéo partout dans le monde avec nos équipes de professionnels triés sur le volet. Des contenus d'excellence pour les agences et marques les plus renommées au monde.",
+      "description": "Basés à Paris, Londres et Los Angeles, nous vous accompagnons dans vos productions vidéo sur 3 continents avec nos équipes locales triées sur le volet.",
       "cta": "Obtenir un Devis"
     },
     "work": {
       "title": "Nos réalisations.",
+      "subtitle": "Des contenus d'excellence pour les meilleures agences et marques.",
       "viewAll": "Voir Tous Nos Projets"
     },
     "capabilities": {
@@ -128,7 +129,8 @@
     "year": "Année",
     "ctaTitle": "Envie de travailler ensemble ?",
     "ctaDescription": "Discutons de la façon dont nous pouvons donner vie à votre vision.",
-    "ctaButton": "Obtenir un Devis"
+    "ctaButton": "Obtenir un Devis",
+    "gallery": "Galerie"
   },
   "QuotePage": {
     "metaTitle": "Obtenir un Devis | 8020 Films",

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { submitQuoteRequest } from '@/lib/supabase/queries';
+import { sendQuoteNotification } from '@/lib/email';
 
 export async function POST(request: Request) {
   try {
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
 
     // TODO: Add reCAPTCHA validation here
 
-    const result = await submitQuoteRequest({
+    const quoteData = {
       company: body.company,
       first_name: body.first_name,
       last_name: body.last_name,
@@ -33,7 +34,9 @@ export async function POST(request: Request) {
       message: body.message,
       additional_info: body.additional_info || null,
       how_heard: body.how_heard || null,
-    });
+    };
+
+    const result = await submitQuoteRequest(quoteData);
 
     if (!result.success) {
       return NextResponse.json(
@@ -42,7 +45,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Send email notification via Supabase Edge Function or Resend
+    // Send email notification (don't fail the request if email fails)
+    await sendQuoteNotification(quoteData);
 
     return NextResponse.json({ success: true });
   } catch (error) {

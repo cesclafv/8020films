@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import type { WorkReference } from '@/lib/supabase/queries';
@@ -44,8 +45,8 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
 
         {/* Case Study Card */}
         <div className="max-w-5xl mx-auto">
-          {/* Video Embed */}
-          {videoEmbedUrl && (
+          {/* Video Embed or Thumbnail */}
+          {videoEmbedUrl ? (
             <div className="aspect-video bg-black mb-8 overflow-hidden">
               <iframe
                 src={videoEmbedUrl}
@@ -54,7 +55,16 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
                 title={caseStudy.title}
               />
             </div>
-          )}
+          ) : caseStudy.featured_image_url ? (
+            <div className="aspect-video bg-black mb-8 overflow-hidden relative">
+              <Image
+                src={caseStudy.featured_image_url}
+                alt={caseStudy.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ) : null}
 
           {/* Meta Info */}
           <div className="flex flex-wrap gap-8 mb-6 text-sm uppercase tracking-wider">

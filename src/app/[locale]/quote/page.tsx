@@ -28,12 +28,15 @@ export default async function QuotePage({ params }: Props) {
       <Header />
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-6">
-          {/* Hero Section */}
-          <div className="max-w-3xl mx-auto mb-16">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-              {t('title')}
-            </h1>
-            <div className="text-lg text-[#6b7280] space-y-4">
+          {/* Title - Full width */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-12 tracking-tight">
+            {t('title')}
+          </h1>
+
+          {/* Two-column layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Left column: Intro text */}
+            <div className="text-lg text-[#6b7280] space-y-6">
               <p>{t('intro1')}</p>
               <p>{t('intro2')}</p>
               <p className="pt-4">
@@ -49,10 +52,10 @@ export default async function QuotePage({ params }: Props) {
                 </a>
               </p>
             </div>
-          </div>
 
-          {/* Form Section */}
-          <QuotePageContent />
+            {/* Right column: Form */}
+            <QuotePageContent />
+          </div>
         </div>
       </main>
       <Footer />

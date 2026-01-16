@@ -21,11 +21,12 @@
   },
   "HomePage": {
     "hero": {
-      "description": "Based in Paris, London & Los Angeles we can unlock video production for you anywhere in the world with our teams of vetted, hand-selected crews. Best-in-class content for some of the world's most renowned agencies and brands.",
+      "description": "Based in Paris, London & Los Angeles we unlock video production for you anywhere in the world with our teams of vetted, hand-selected crews.",
       "cta": "Get a Quote"
     },
     "work": {
       "title": "Some of our work.",
+      "subtitle": "Best-in-class content for some of the world's most renowned agencies and brands.",
       "viewAll": "View All Our Work"
     },
     "capabilities": {
@@ -128,7 +129,8 @@
     "year": "Year",
     "ctaTitle": "Interested in working together?",
     "ctaDescription": "Let's discuss how we can bring your vision to life.",
-    "ctaButton": "Get a Quote"
+    "ctaButton": "Get a Quote",
+    "gallery": "Gallery"
   },
   "QuotePage": {
     "metaTitle": "Get a Quote | 8020 Films",
