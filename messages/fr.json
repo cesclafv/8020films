@@ -10,6 +10,13 @@
   },
   "Footer": {
     "tagline": "Production vidéo haut de gamme sur trois continents.",
+    "services": "Services",
+    "liveStreaming": "Streaming Live",
+    "corporateVideo": "Vidéo Corporate",
+    "brandStorytelling": "Storytelling de Marque",
+    "remoteProduction": "Production à Distance",
+    "musicVideo": "Clips Musicaux",
+    "locations": "Nos Bureaux",
     "followUs": "Suivez-nous",
     "connect": "Contact",
     "contactUs": "Contactez-nous",
@@ -171,5 +178,329 @@
     "contactTitle": "Contactez-nous",
     "contactDescription": "Envoyez-nous votre CV et portfolio, et dites-nous pourquoi vous seriez un atout pour 8020 Films.",
     "contactButton": "Nous Écrire"
+  },
+  "LocationPages": {
+    "paris": {
+      "metaTitle": "Production Vidéo Paris | 8020 Films",
+      "metaDescription": "Services de production vidéo professionnelle à Paris. Streaming live, vidéo corporate, storytelling de marque et plus encore.",
+      "title": "Production Vidéo à Paris",
+      "subtitle": "Services de production vidéo premium au cœur de la France",
+      "intro": "Notre équipe parisienne apporte des capacités de production vidéo de classe mondiale à l'une des villes les plus créatives d'Europe. Des vidéos corporate aux événements en streaming live, nous livrons un contenu exceptionnel qui raconte votre histoire.",
+      "whyTitle": "Pourquoi Choisir 8020 Films Paris",
+      "why1": "Équipe locale avec une connaissance approfondie des lieux et autorisations à Paris",
+      "why2": "Équipe multilingue parlant français et anglais",
+      "why3": "Accès à des studios premium à travers Paris",
+      "why4": "Connecté à nos bureaux de Londres et LA pour des projets internationaux",
+      "servicesTitle": "Nos Services à Paris",
+      "ctaTitle": "Lancez Votre Projet à Paris",
+      "ctaDescription": "Prêt à créer quelque chose d'extraordinaire à Paris ? Notre équipe est là pour donner vie à votre vision.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Quels services de production vidéo proposez-vous à Paris ?",
+          "answer": "Nous offrons des services complets de production vidéo à Paris incluant vidéos corporate, films de marque, streaming live, couverture événementielle, clips musicaux et contenus documentaires. Notre équipe parisienne gère tout, de la pré-production à la livraison finale."
+        },
+        {
+          "question": "Avez-vous une équipe permanente basée à Paris ?",
+          "answer": "Oui, nous avons une équipe dédiée basée à Paris avec une connaissance locale approfondie. Notre équipe est multilingue, maîtrisant le français et l'anglais, et expérimentée avec les autorisations de tournage à Paris, les lieux emblématiques et les studios à travers la ville."
+        },
+        {
+          "question": "Pouvez-vous aider avec les autorisations de tournage à Paris ?",
+          "answer": "Absolument. Notre équipe parisienne possède une vaste expérience dans la navigation du processus d'autorisation pour filmer à Paris, incluant les autorisations pour les espaces publics, monuments et lieux privés. Nous gérons toute la logistique pour que vous puissiez vous concentrer sur votre vision créative."
+        },
+        {
+          "question": "Combien coûte une production vidéo à Paris ?",
+          "answer": "Les coûts varient selon la portée, la durée et les exigences du projet. Nous travaillons avec des budgets allant de 5 000€ pour des productions simples à plus de 100 000€ pour des campagnes à grande échelle. Contactez-nous pour un devis personnalisé adapté à vos besoins spécifiques."
+        }
+      ]
+    },
+    "london": {
+      "metaTitle": "Production Vidéo Londres | 8020 Films",
+      "metaDescription": "Services de production vidéo professionnelle à Londres. Streaming live, vidéo corporate, storytelling de marque et plus encore.",
+      "title": "Production Vidéo à Londres",
+      "subtitle": "Production vidéo primée dans la capitale créative du Royaume-Uni",
+      "intro": "Basée au cœur de Londres, notre équipe UK livre une production vidéo exceptionnelle pour les marques, agences et organisations à travers le pays et au-delà.",
+      "whyTitle": "Pourquoi Choisir 8020 Films Londres",
+      "why1": "Bureau central à Londres avec accès facile à tous les lieux majeurs",
+      "why2": "Équipe expérimentée avec des backgrounds en broadcast et commercial",
+      "why3": "Capacités de production complètes du concept à la livraison",
+      "why4": "Coordination fluide avec nos équipes de Paris et LA",
+      "servicesTitle": "Nos Services à Londres",
+      "ctaTitle": "Lancez Votre Projet à Londres",
+      "ctaDescription": "Prêt à créer du contenu vidéo captivant à Londres ? Parlons de votre projet.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Quels services de production vidéo proposez-vous à Londres ?",
+          "answer": "Notre équipe londonienne fournit une production vidéo complète incluant vidéos corporate, storytelling de marque, streaming live, couverture événementielle, publicités et contenus documentaires. Nous gérons des projets de toutes tailles, des tournages d'une journée aux productions de plusieurs semaines."
+        },
+        {
+          "question": "Où se trouve votre bureau de Londres ?",
+          "answer": "Notre bureau de Londres est situé en centre-ville, offrant un accès facile à tous les principaux lieux de tournage de la ville. Nous pouvons nous mobiliser rapidement vers n'importe quel emplacement à Londres et dans les environs pour vos besoins de production."
+        },
+        {
+          "question": "Travaillez-vous avec des clients internationaux à Londres ?",
+          "answer": "Oui, nous travaillons fréquemment avec des clients internationaux qui ont besoin de production vidéo à Londres. Notre équipe se coordonne parfaitement avec nos bureaux de Paris et Los Angeles pour les campagnes mondiales, et nous sommes expérimentés dans la gestion de productions pour des clients du monde entier."
+        },
+        {
+          "question": "Quel est votre délai de livraison pour les projets vidéo à Londres ?",
+          "answer": "Le délai dépend de la complexité du projet. Les montages simples peuvent être livrés en quelques jours, tandis que les productions complètes prennent généralement 2 à 6 semaines du tournage à la livraison finale. Nous offrons également des services express pour les projets urgents."
+        }
+      ]
+    },
+    "losAngeles": {
+      "metaTitle": "Production Vidéo Los Angeles | 8020 Films",
+      "metaDescription": "Services de production vidéo professionnelle à Los Angeles. Streaming live, vidéo corporate, storytelling de marque et plus encore.",
+      "title": "Production Vidéo à Los Angeles",
+      "subtitle": "Production de qualité Hollywood pour les marques du monde entier",
+      "intro": "Depuis notre base à Los Angeles, nous apportons les valeurs de production et le talent créatif de la capitale du divertissement au contenu vidéo de votre marque.",
+      "whyTitle": "Pourquoi Choisir 8020 Films Los Angeles",
+      "why1": "Accès à des talents et équipements de calibre Hollywood",
+      "why2": "Options de lieux variées, des plages aux décors urbains",
+      "why3": "Installations de post-production à la pointe de la technologie",
+      "why4": "Portée mondiale grâce à nos bureaux de Paris et Londres",
+      "servicesTitle": "Nos Services à Los Angeles",
+      "ctaTitle": "Lancez Votre Projet à LA",
+      "ctaDescription": "Prêt à créer du contenu vidéo de classe mondiale à Los Angeles ? Notre équipe est prête.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Qu'est-ce qui distingue votre production vidéo à LA ?",
+          "answer": "Notre équipe de Los Angeles apporte des valeurs de production de niveau Hollywood à chaque projet. Nous avons accès aux meilleurs talents, équipements de pointe et installations de post-production de classe mondiale. Notre expérience couvre les publicités, films de marque, événements live et clips musicaux."
+        },
+        {
+          "question": "Pouvez-vous produire du contenu pour des marques internationales à Los Angeles ?",
+          "answer": "Absolument. Nous produisons régulièrement du contenu à LA pour des marques internationales et nous coordonnons avec nos bureaux de Paris et Londres pour les campagnes mondiales. Notre équipe est expérimentée dans la création de contenu qui résonne avec des audiences du monde entier tout en tirant parti des capacités de production uniques de LA."
+        },
+        {
+          "question": "Quels lieux sont disponibles pour le tournage à Los Angeles ?",
+          "answer": "Los Angeles offre une incroyable diversité de lieux—des plages emblématiques aux paysages désertiques, des décors urbains modernes aux quartiers historiques. Notre équipe possède une vaste expérience en repérage et peut obtenir des autorisations pour pratiquement tout type de tournage dans la région de LA."
+        },
+        {
+          "question": "Proposez-vous des services de post-production à Los Angeles ?",
+          "answer": "Oui, nous disposons de capacités de post-production à la pointe de la technologie à LA incluant montage, étalonnage, motion graphics, effets visuels et design sonore. Nous pouvons gérer l'intégralité de votre projet du concept à la livraison finale."
+        }
+      ]
+    }
+  },
+  "ServicePages": {
+    "liveStreaming": {
+      "metaTitle": "Services de Streaming Live | 8020 Films",
+      "metaDescription": "Services professionnels de streaming live et production d'événements. Diffusions multi-caméras, événements virtuels et conférences hybrides dans le monde entier.",
+      "title": "Streaming Live & Événements",
+      "subtitle": "Production live de qualité broadcast pour des audiences mondiales",
+      "intro": "Des conférences corporate aux festivals de musique, nous livrons des expériences de streaming live impeccables qui engagent les audiences du monde entier. Notre équipe gère tout, de la configuration technique aux graphiques en temps réel.",
+      "whatWeOfferTitle": "Ce Que Nous Offrons",
+      "offer1Title": "Production Multi-Caméras",
+      "offer1Description": "Configurations multi-caméras professionnelles avec switching fluide, graphiques et bandeaux pour des streams de qualité broadcast.",
+      "offer2Title": "Événements Virtuels & Hybrides",
+      "offer2Description": "Production complète pour conférences virtuelles, événements hybrides et webinaires interactifs à portée mondiale.",
+      "offer3Title": "Streaming Concerts & Festivals",
+      "offer3Description": "Couverture live haute énergie de concerts, festivals et performances avec production audio et visuelle immersive.",
+      "offer4Title": "Diffusions Corporate",
+      "offer4Description": "Town halls, lancements de produits et résultats financiers avec présentation professionnelle et outils d'engagement audience.",
+      "whyTitle": "Pourquoi Nous Choisir pour le Streaming Live",
+      "why1": "Systèmes redondants assurant 99.9% de disponibilité pour vos événements",
+      "why2": "Graphiques en temps réel et intégration de marque",
+      "why3": "Diffusion CDN mondiale pour des audiences internationales",
+      "why4": "Équipe expérimentée avec des backgrounds en broadcast",
+      "ctaTitle": "Planifiez Votre Événement Live",
+      "ctaDescription": "Prêt à passer en live ? Discutons de vos besoins de streaming et créons une expérience de diffusion inoubliable.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Sur quelles plateformes pouvez-vous diffuser ?",
+          "answer": "Nous pouvons diffuser sur pratiquement toutes les plateformes incluant YouTube, Vimeo, LinkedIn Live, Facebook, Twitch et des destinations RTMP personnalisées. Nous supportons également la diffusion simultanée multi-plateformes et pouvons intégrer vos outils de visioconférence existants."
+        },
+        {
+          "question": "Comment assurez-vous la fiabilité du stream ?",
+          "answer": "Nous utilisons des systèmes redondants incluant encodeurs de backup, connexions internet multiples et protocoles de basculement pour assurer 99.9% de disponibilité. Notre équipe surveille tous les aspects techniques en temps réel et peut basculer instantanément vers les systèmes de backup si nécessaire."
+        },
+        {
+          "question": "Pouvez-vous ajouter des graphiques et du branding aux streams live ?",
+          "answer": "Oui, nous fournissons des packages graphiques complets incluant bandeaux, logos, transitions animées, flux de réseaux sociaux en direct et affichages de données en temps réel. Tous les graphiques sont personnalisés selon vos guidelines de marque."
+        },
+        {
+          "question": "Quel est le temps d'installation typique pour un événement live ?",
+          "answer": "Le temps d'installation varie selon la complexité. Les streams simples à caméra unique peuvent nécessiter 1-2 heures, tandis que les productions multi-caméras avec graphiques requièrent généralement 4-8 heures. Nous arrivons toujours en avance pour tester tous les systèmes avant de passer en direct."
+        }
+      ]
+    },
+    "corporateVideo": {
+      "metaTitle": "Production Vidéo Corporate | 8020 Films",
+      "metaDescription": "Services de production vidéo corporate professionnelle. Profils d'entreprise, communications dirigeants, vidéos de formation et communications internes.",
+      "title": "Production Vidéo Corporate",
+      "subtitle": "Contenu vidéo professionnel qui élève votre marque",
+      "intro": "Nous créons des vidéos corporate captivantes qui communiquent votre message avec clarté et impact. Des interviews de dirigeants aux communications d'entreprise, notre équipe livre un contenu soigné qui représente votre marque au mieux.",
+      "whatWeOfferTitle": "Ce Que Nous Offrons",
+      "offer1Title": "Profils d'Entreprise",
+      "offer1Description": "Mettez en valeur la culture, les valeurs et les capacités de votre organisation avec des vidéos d'entreprise produites professionnellement.",
+      "offer2Title": "Communications Dirigeants",
+      "offer2Description": "Messages vidéo de haute qualité de la direction qui connectent avec les employés, parties prenantes et clients.",
+      "offer3Title": "Formation & Éducation",
+      "offer3Description": "Vidéos de formation engageantes qui améliorent la rétention et rendent les sujets complexes accessibles à votre équipe.",
+      "offer4Title": "Communications Internes",
+      "offer4Description": "Mises à jour vidéo régulières, town halls et communications d'équipe qui gardent votre organisation connectée.",
+      "whyTitle": "Pourquoi Nous Choisir pour la Vidéo Corporate",
+      "why1": "Expérience avec des entreprises Fortune 500 et marques mondiales",
+      "why2": "Processus de production efficace qui respecte les agendas des dirigeants",
+      "why3": "Alignement de marque cohérent sur tout le contenu vidéo",
+      "why4": "Délais rapides sans compromettre la qualité",
+      "ctaTitle": "Élevez Vos Communications Corporate",
+      "ctaDescription": "Prêt à transformer la façon dont votre organisation communique ? Créons du contenu vidéo qui fait impact.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Quels types de vidéos corporate produisez-vous ?",
+          "answer": "Nous produisons une large gamme de contenus corporate incluant profils d'entreprise, messages de dirigeants, vidéos de formation, communications internes, démonstrations de produits, vidéos de recrutement et contenus relations investisseurs. Chaque vidéo est adaptée à vos objectifs spécifiques et votre audience."
+        },
+        {
+          "question": "Comment travaillez-vous avec les dirigeants occupés ?",
+          "answer": "Nous comprenons que le temps des dirigeants est précieux. Notre processus est conçu pour l'efficacité—nous fournissons des briefs de pré-production détaillés, offrons un support téléprompteur, et terminons généralement les interviews en 30-60 minutes. Nous gérons toute la logistique pour que les dirigeants n'aient qu'à se présenter et parler."
+        },
+        {
+          "question": "Pouvez-vous assurer la cohérence de marque sur plusieurs vidéos ?",
+          "answer": "Absolument. Nous créons et maintenons des guidelines de marque pour votre contenu vidéo incluant style visuel, templates de motion graphics, profils d'étalonnage et bibliothèques musicales. Cela assure la cohérence que vous produisiez une vidéo ou une bibliothèque entière de contenus."
+        },
+        {
+          "question": "Quel est le délai typique pour une vidéo corporate ?",
+          "answer": "Une vidéo corporate standard prend 2 à 4 semaines du lancement à la livraison, incluant pré-production, tournage et post-production. Nous offrons également des délais accélérés pour les projets urgents et pouvons produire du contenu le jour même ou le lendemain pour les communications sensibles au temps."
+        }
+      ]
+    },
+    "brandStorytelling": {
+      "metaTitle": "Production Vidéo Storytelling de Marque | 8020 Films",
+      "metaDescription": "Films de marque captivants et contenu style documentaire qui raconte votre histoire, crée des connexions émotionnelles et génère de l'engagement.",
+      "title": "Storytelling de Marque",
+      "subtitle": "Histoires authentiques qui connectent les marques avec leurs audiences",
+      "intro": "Les grandes marques ont de grandes histoires. Nous vous aidons à découvrir et partager la vôtre à travers du contenu documentaire captivant, des films de marque et des vidéos narratives qui créent de véritables connexions émotionnelles avec votre audience.",
+      "whatWeOfferTitle": "Ce Que Nous Offrons",
+      "offer1Title": "Films de Marque",
+      "offer1Description": "Histoires de marque cinématographiques qui capturent l'essence, les valeurs et la vision de votre entreprise dans des récits visuels captivants.",
+      "offer2Title": "Contenu Documentaire",
+      "offer2Description": "Vidéos approfondies style documentaire qui explorent l'impact, les personnes et la raison d'être de votre marque.",
+      "offer3Title": "Témoignages Clients",
+      "offer3Description": "Témoignages authentiques et vidéos d'études de cas qui laissent vos clients partager leurs expériences.",
+      "offer4Title": "Vidéos de Campagne",
+      "offer4Description": "Contenu de campagne axé sur l'histoire qui soutient vos initiatives marketing sur tous les canaux.",
+      "whyTitle": "Pourquoi Nous Choisir pour le Storytelling de Marque",
+      "why1": "Expertise en réalisation documentaire pour des récits authentiques",
+      "why2": "Processus de découverte approfondi pour révéler votre histoire unique",
+      "why3": "Storytelling émotionnel qui pousse à l'action",
+      "why4": "Contenu optimisé pour multiples plateformes et formats",
+      "ctaTitle": "Racontez Votre Histoire de Marque",
+      "ctaDescription": "Chaque marque a une histoire qui mérite d'être racontée. Découvrons la vôtre et partageons-la avec le monde.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'une vidéo de storytelling de marque ?",
+          "answer": "Le storytelling de marque est l'art d'utiliser la vidéo pour communiquer le but, les valeurs et l'impact de votre marque à travers des récits captivants. Contrairement à la publicité traditionnelle, les histoires de marque se concentrent sur la connexion émotionnelle et l'authenticité, montrant aux audiences pourquoi votre marque compte plutôt que ce que vous vendez."
+        },
+        {
+          "question": "Comment découvrez-vous l'histoire de notre marque ?",
+          "answer": "Nous commençons par un processus de découverte approfondi incluant interviews des parties prenantes, audits de marque et recherche d'audience. Nous explorons l'histoire de votre entreprise, sa mission, sa culture et l'impact réel que vous avez sur les clients et communautés. Cette recherche forme le fondement d'un récit authentique qui résonne."
+        },
+        {
+          "question": "Qu'est-ce qui fait un bon film de marque ?",
+          "answer": "Les meilleurs films de marque connectent émotionnellement, racontent des histoires authentiques et montrent plutôt que raconter. Ils présentent de vraies personnes et des moments sincères, ont un storytelling visuel fort et laissent les spectateurs avec une compréhension claire de ce qui rend votre marque unique. Nous nous concentrons sur la création de contenu que les audiences veulent vraiment regarder et partager."
+        },
+        {
+          "question": "Quelle devrait être la durée d'une vidéo de storytelling de marque ?",
+          "answer": "La durée dépend de la plateforme et de l'objectif. Les films de marque principaux font généralement 2-5 minutes pour un impact émotionnel maximal. Nous créons également des versions courtes (30 secondes à 2 minutes) pour les réseaux sociaux et la publicité. Beaucoup de clients commandent un film de marque complet accompagné d'une suite de pièces plus courtes pour différents canaux."
+        }
+      ]
+    },
+    "remoteProduction": {
+      "metaTitle": "Services de Production Vidéo à Distance | 8020 Films",
+      "metaDescription": "Production vidéo à distance connectant les équipes du monde entier. Résultats de qualité studio depuis n'importe quel lieu.",
+      "title": "Production à Distance",
+      "subtitle": "Vidéo de qualité studio depuis n'importe où dans le monde",
+      "intro": "Nos capacités de production à distance vous permettent de diriger et superviser des tournages depuis n'importe où. Avec nos kits de tournage connectés et nos équipes locales expérimentées, nous livrons une production vidéo de haute qualité constante à travers le globe.",
+      "whatWeOfferTitle": "Ce Que Nous Offrons",
+      "offer1Title": "Direction à Distance",
+      "offer1Description": "Dirigez votre tournage en temps réel depuis n'importe où grâce à nos systèmes de monitoring et communication à faible latence.",
+      "offer2Title": "Kits de Tournage Connectés",
+      "offer2Description": "Packages caméra professionnels avec capacités de streaming live pour supervision et validation à distance.",
+      "offer3Title": "Réseau d'Équipes Mondial",
+      "offer3Description": "Accès à des équipes vérifiées et professionnelles dans les grandes villes du monde, gérées par nos équipes de production locales.",
+      "offer4Title": "Tournages Multi-Lieux",
+      "offer4Description": "Coordonnez des productions simultanées sur plusieurs lieux avec une direction créative centralisée.",
+      "whyTitle": "Pourquoi Nous Choisir pour la Production à Distance",
+      "why1": "Bureaux à Paris, Londres et LA pour une vraie couverture mondiale",
+      "why2": "Standards de qualité cohérents sur tous les lieux",
+      "why3": "Économies significatives vs. équipes de production en déplacement",
+      "why4": "Planning flexible à travers les fuseaux horaires",
+      "ctaTitle": "Passez au Mondial avec la Production à Distance",
+      "ctaDescription": "Besoin de produire du contenu dans plusieurs lieux ? Nos capacités de production à distance rendent cela fluide.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Comment fonctionne la production vidéo à distance ?",
+          "answer": "Nos kits de tournage connectés diffusent de la vidéo à faible latence vers votre emplacement, vous permettant de voir exactement ce que voit la caméra en temps réel. Vous pouvez communiquer avec l'équipe sur place, revoir les prises et prendre des décisions créatives comme si vous étiez sur le plateau—tout en restant à votre bureau ou chez vous."
+        },
+        {
+          "question": "Quels lieux couvrez-vous pour la production à distance ?",
+          "answer": "Avec des bureaux à Paris, Londres et Los Angeles, nous avons des équipes et du matériel à travers l'Europe et l'Amérique du Nord. Nous avons également des réseaux d'équipes vérifiées dans les grandes villes du monde entier et pouvons coordonner des productions pratiquement partout où vous avez besoin de créer du contenu."
+        },
+        {
+          "question": "La qualité est-elle la même qu'en étant sur le plateau ?",
+          "answer": "Oui. Nos kits à distance utilisent des caméras cinéma professionnelles et nos équipes sont des professionnels expérimentés. La seule différence est la façon dont vous supervisez le tournage. Beaucoup de clients trouvent que la production à distance améliore en fait l'efficacité puisque plusieurs parties prenantes peuvent voir le flux depuis différents endroits simultanément."
+        },
+        {
+          "question": "Combien puis-je économiser avec la production à distance ?",
+          "answer": "La production à distance permet généralement d'économiser 30-50% par rapport au déplacement d'une équipe de production complète sur place. Vous éliminez les frais de voyage, d'hébergement et les per diem tout en maintenant un contrôle créatif total. Pour les tournages multi-lieux, les économies se multiplient significativement."
+        }
+      ]
+    },
+    "musicVideo": {
+      "metaTitle": "Production de Clips Musicaux | 8020 Films",
+      "metaDescription": "Production créative de clips musicaux du concept à la livraison. Travail avec artistes et labels pour créer des clips visuellement époustouflants.",
+      "title": "Production de Clips Musicaux",
+      "subtitle": "Storytelling visuel pour artistes et labels",
+      "intro": "Nous créons des clips musicaux qui capturent l'énergie, l'émotion et l'art de votre musique. Du développement de concept à la post-production, notre équipe apporte vision créative et excellence technique à chaque projet.",
+      "whatWeOfferTitle": "Ce Que Nous Offrons",
+      "offer1Title": "Développement de Concept",
+      "offer1Description": "Développement créatif collaboratif qui traduit votre musique en récits visuels captivants.",
+      "offer2Title": "Vidéos Performance",
+      "offer2Description": "Capture de performance dynamique qui met en valeur artistes et groupes avec des valeurs de production cinématographiques.",
+      "offer3Title": "Clips Narratifs",
+      "offer3Description": "Clips musicaux axés sur l'histoire avec acteurs professionnels, lieux et direction artistique.",
+      "offer4Title": "Sessions Live",
+      "offer4Description": "Vidéos de performance live intimistes captées en studio ou lieux uniques avec audio impeccable.",
+      "whyTitle": "Pourquoi Nous Choisir pour les Clips Musicaux",
+      "why1": "Expérience avec labels majeurs et artistes indépendants",
+      "why2": "Directeurs créatifs avec backgrounds dans l'industrie musicale",
+      "why3": "Capacités de production complètes du pré au post",
+      "why4": "Budgets flexibles pour projets de toutes tailles",
+      "ctaTitle": "Créez Votre Clip Musical",
+      "ctaDescription": "Prêt à donner vie visuellement à votre musique ? Créons quelque chose qui correspond à votre vision artistique.",
+      "ctaButton": "Obtenir un Devis",
+      "faqTitle": "Questions Fréquentes",
+      "faqs": [
+        {
+          "question": "Combien coûte un clip musical ?",
+          "answer": "Les budgets de clips musicaux varient largement selon la complexité du concept, les lieux, le casting et l'échelle de production. Nous travaillons avec des budgets de 5 000€ pour des clips de performance simples à plus de 100 000€ pour des productions narratives à concept élaboré. Nous vous aiderons à maximiser la valeur de production dans votre budget."
+        },
+        {
+          "question": "À quel point puis-je être impliqué dans le processus créatif ?",
+          "answer": "Autant que vous le souhaitez. Certains artistes arrivent avec des concepts entièrement développés, tandis que d'autres préfèrent collaborer étroitement avec notre équipe créative. Nous commençons généralement par votre musique et votre vision, puis développons les traitements ensemble, affinant jusqu'à ce que le concept corresponde parfaitement à votre direction artistique."
+        },
+        {
+          "question": "Combien de temps prend la production d'un clip musical ?",
+          "answer": "Le délai dépend de la complexité du concept. Les clips de performance simples peuvent être terminés en 2-3 semaines du tournage à la livraison. Les clips narratifs avec lieux, casting et effets visuels prennent généralement 4-8 semaines. Nous pouvons nous adapter à des délais serrés pour les dates de sortie si nécessaire."
+        },
+        {
+          "question": "Travaillez-vous avec des artistes indépendants ou uniquement des labels ?",
+          "answer": "Nous travaillons avec tout le monde—labels majeurs, labels indépendants et artistes en auto-production. Notre approche flexible nous permet d'adapter la production à n'importe quel budget tout en maintenant des standards créatifs et techniques élevés. Chaque artiste mérite un excellent clip musical."
+        }
+      ]
+    }
   }
 }

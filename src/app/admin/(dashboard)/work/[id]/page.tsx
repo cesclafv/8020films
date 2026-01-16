@@ -54,7 +54,7 @@ export default function AdminWorkEditPage() {
   const [saving, setSaving] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [locale, setLocale] = useState<'en' | 'fr'>('en');
+  const [locale, setLocale] = useState<'en' | 'fr' | 'es'>('en');
 
   // Form state
   const [slug, setSlug] = useState('');
@@ -72,6 +72,7 @@ export default function AdminWorkEditPage() {
   const [translations, setTranslations] = useState<Record<string, Translation>>({
     en: { locale: 'en', title: '', excerpt: '', body_html: '' },
     fr: { locale: 'fr', title: '', excerpt: '', body_html: '' },
+    es: { locale: 'es', title: '', excerpt: '', body_html: '' },
   });
 
   // Videos
@@ -123,6 +124,7 @@ export default function AdminWorkEditPage() {
           const transMap: Record<string, Translation> = {
             en: { locale: 'en', title: '', excerpt: '', body_html: '' },
             fr: { locale: 'fr', title: '', excerpt: '', body_html: '' },
+            es: { locale: 'es', title: '', excerpt: '', body_html: '' },
           };
           trans.forEach((t) => {
             transMap[t.locale] = t;
@@ -244,7 +246,7 @@ export default function AdminWorkEditPage() {
       }
 
       // Update translations
-      for (const loc of ['en', 'fr']) {
+      for (const loc of ['en', 'fr', 'es']) {
         const trans = translations[loc];
         if (trans.title) {
           await supabase
@@ -372,6 +374,16 @@ export default function AdminWorkEditPage() {
             }`}
           >
             French
+          </button>
+          <button
+            onClick={() => setLocale('es')}
+            className={`px-3 py-1 text-sm rounded ${
+              locale === 'es'
+                ? 'bg-[#0a0a0a] text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            Spanish
           </button>
         </div>
 

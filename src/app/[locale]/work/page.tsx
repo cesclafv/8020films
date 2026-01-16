@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: Props) {
       languages: {
         en: `${baseUrl}/en/work`,
         fr: `${baseUrl}/fr/work`,
+        es: `${baseUrl}/es/work`,
         'x-default': `${baseUrl}/en/work`,
       },
     },
@@ -32,7 +33,7 @@ export async function generateMetadata({ params }: Props) {
       description,
       url: `${baseUrl}/${locale}/work`,
       siteName: '8020 Films',
-      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      locale: locale === 'fr' ? 'fr_FR' : locale === 'es' ? 'es_ES' : 'en_US',
       type: 'website',
     },
   };

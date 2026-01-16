@@ -78,30 +78,73 @@ export function WebSiteJsonLd() {
 }
 
 // LocalBusiness schema for each location
-export function LocalBusinessJsonLd() {
+type LocationKey = 'paris' | 'london' | 'losAngeles';
+
+const locationSchemas: Record<LocationKey, {
+  id: string;
+  name: string;
+  telephone: string;
+  address: Record<string, string>;
+  geo: { latitude: number; longitude: number };
+}> = {
+  losAngeles: {
+    id: 'los-angeles',
+    name: '8020 Films - Los Angeles',
+    telephone: '+1-424-877-2109',
+    address: {
+      streetAddress: '10949 Ayres Ave.',
+      addressLocality: 'Los Angeles',
+      addressRegion: 'CA',
+      postalCode: '90064',
+      addressCountry: 'US',
+    },
+    geo: { latitude: 34.0375, longitude: -118.4356 },
+  },
+  london: {
+    id: 'london',
+    name: '8020 Films - London',
+    telephone: '+44-7450-463111',
+    address: {
+      streetAddress: '85 Great Portland Street',
+      addressLocality: 'London',
+      postalCode: 'W1W 7LT',
+      addressCountry: 'GB',
+    },
+    geo: { latitude: 51.5207, longitude: -0.1432 },
+  },
+  paris: {
+    id: 'paris',
+    name: '8020 Films - Paris',
+    telephone: '+33-1-XX-XX-XX-XX',
+    address: {
+      addressLocality: 'Paris',
+      postalCode: '75008',
+      addressCountry: 'FR',
+    },
+    geo: { latitude: 48.8566, longitude: 2.3522 },
+  },
+};
+
+export function LocalBusinessJsonLd({ location }: { location?: LocationKey }) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
 
-  const locations = [
-    {
+  const createLocationSchema = (loc: LocationKey) => {
+    const data = locationSchemas[loc];
+    return {
       '@context': 'https://schema.org',
       '@type': 'VideoProductionCompany',
-      '@id': `${baseUrl}/#los-angeles`,
-      name: '8020 Films - Los Angeles',
+      '@id': `${baseUrl}/#${data.id}`,
+      name: data.name,
       image: `${baseUrl}/img/og-image.jpg`,
-      url: baseUrl,
-      telephone: '+1-424-877-2109',
+      url: `${baseUrl}/en/${data.id}`,
+      telephone: data.telephone,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '10949 Ayres Ave.',
-        addressLocality: 'Los Angeles',
-        addressRegion: 'CA',
-        postalCode: '90064',
-        addressCountry: 'US',
+        ...data.address,
       },
       geo: {
         '@type': 'GeoCoordinates',
-        latitude: 34.0375,
-        longitude: -118.4356,
+        ...data.geo,
       },
       openingHoursSpecification: {
         '@type': 'OpeningHoursSpecification',
@@ -114,48 +157,83 @@ export function LocalBusinessJsonLd() {
         '@type': 'Organization',
         name: '8020 Films',
       },
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'VideoProductionCompany',
-      '@id': `${baseUrl}/#london`,
-      name: '8020 Films - London',
-      image: `${baseUrl}/img/og-image.jpg`,
-      url: baseUrl,
-      telephone: '+44-7450-463111',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '85 Great Portland Street',
-        addressLocality: 'London',
-        postalCode: 'W1W 7LT',
-        addressCountry: 'GB',
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: 51.5207,
-        longitude: -0.1432,
-      },
-      openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
-        closes: '20:00',
-      },
-      priceRange: '$$$$',
-      parentOrganization: {
-        '@type': 'Organization',
-        name: '8020 Films',
-      },
-    },
-  ];
+    };
+  };
 
+  // If a specific location is provided, render only that one
+  if (location) {
+    return <JsonLd data={createLocationSchema(location)} />;
+  }
+
+  // Otherwise render all locations
+  const allLocations: LocationKey[] = ['losAngeles', 'london', 'paris'];
   return (
     <>
-      {locations.map((location, index) => (
-        <JsonLd key={index} data={location} />
+      {allLocations.map((loc) => (
+        <JsonLd key={loc} data={createLocationSchema(loc)} />
       ))}
     </>
   );
+}
+
+// Service schema for service pages
+type ServiceKey = 'liveStreaming' | 'corporateVideo' | 'brandStorytelling' | 'remoteProduction' | 'musicVideo';
+
+const serviceSchemas: Record<ServiceKey, {
+  name: string;
+  description: string;
+  serviceType: string;
+}> = {
+  liveStreaming: {
+    name: 'Live Streaming & Events',
+    description: 'Professional live streaming services for corporate events, conferences, product launches, and virtual gatherings. Multi-camera production with real-time graphics and worldwide delivery.',
+    serviceType: 'Live Event Production',
+  },
+  corporateVideo: {
+    name: 'Corporate Video Production',
+    description: 'High-quality corporate video production including company profiles, executive communications, training videos, and internal communications.',
+    serviceType: 'Corporate Video Production',
+  },
+  brandStorytelling: {
+    name: 'Brand Storytelling',
+    description: 'Compelling brand films and documentary-style content that tells your brand story, builds emotional connections, and drives engagement.',
+    serviceType: 'Brand Film Production',
+  },
+  remoteProduction: {
+    name: 'Remote Production',
+    description: 'Remote video production services connecting teams worldwide. Studio-quality results from any location with our distributed production capabilities.',
+    serviceType: 'Remote Video Production',
+  },
+  musicVideo: {
+    name: 'Music Video Production',
+    description: 'Creative music video production from concept to delivery. Working with artists and labels to create visually stunning music videos.',
+    serviceType: 'Music Video Production',
+  },
+};
+
+export function ServiceJsonLd({ service }: { service: ServiceKey }) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
+  const data = serviceSchemas[service];
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: data.name,
+    description: data.description,
+    serviceType: data.serviceType,
+    provider: {
+      '@type': 'Organization',
+      name: '8020 Films',
+      url: baseUrl,
+    },
+    areaServed: [
+      { '@type': 'City', name: 'Los Angeles' },
+      { '@type': 'City', name: 'London' },
+      { '@type': 'City', name: 'Paris' },
+    ],
+  };
+
+  return <JsonLd data={schema} />;
 }
 
 // VideoObject schema for work reference pages

@@ -37,9 +37,10 @@ export function Footer() {
   return (
     <footer className="bg-[#0a0a0a] text-white py-16">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
           {/* Logo */}
-          <div className="md:col-span-1">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/">
               <Image
                 src="/img/logo-8020Films-horizontal_white_1000px.png"
@@ -54,30 +55,69 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Follow Us */}
+          {/* Services */}
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wider mb-4">
-              {t('followUs')}
+              {t('services')}
             </h4>
-            <div className="flex flex-col gap-3">
-              <a
-                href="https://instagram.com/8020films"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors flex items-center gap-2"
+            <div className="flex flex-col gap-2">
+              <Link
+                href="/services/live-streaming"
+                className="text-white/60 hover:text-white transition-colors text-sm"
               >
-                <InstagramIcon />
-                Instagram
-              </a>
-              <a
-                href="https://linkedin.com/company/8020films"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors flex items-center gap-2"
+                {t('liveStreaming')}
+              </Link>
+              <Link
+                href="/services/corporate-video"
+                className="text-white/60 hover:text-white transition-colors text-sm"
               >
-                <LinkedInIcon />
-                LinkedIn
-              </a>
+                {t('corporateVideo')}
+              </Link>
+              <Link
+                href="/services/brand-storytelling"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                {t('brandStorytelling')}
+              </Link>
+              <Link
+                href="/services/remote-production"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                {t('remoteProduction')}
+              </Link>
+              <Link
+                href="/services/music-video"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                {t('musicVideo')}
+              </Link>
+            </div>
+          </div>
+
+          {/* Locations */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider mb-4">
+              {t('locations')}
+            </h4>
+            <div className="flex flex-col gap-2">
+              <Link
+                href="/paris"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                Paris
+              </Link>
+              <Link
+                href="/london"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                London
+              </Link>
+              <Link
+                href="/los-angeles"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                Los Angeles
+              </Link>
             </div>
           </div>
 
@@ -86,24 +126,51 @@ export function Footer() {
             <h4 className="text-sm font-bold uppercase tracking-wider mb-4">
               {t('connect')}
             </h4>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               <Link
                 href="/contact"
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-white/60 hover:text-white transition-colors text-sm"
               >
                 {t('contactUs')}
               </Link>
               <Link
                 href="/quote"
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-white/60 hover:text-white transition-colors text-sm"
               >
                 {t('getQuote')}
               </Link>
               <a
                 href="/admin/login"
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-white/60 hover:text-white transition-colors text-sm"
               >
                 {t('login')}
+              </a>
+            </div>
+          </div>
+
+          {/* Follow Us */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider mb-4">
+              {t('followUs')}
+            </h4>
+            <div className="flex flex-col gap-2">
+              <a
+                href="https://instagram.com/8020films"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors flex items-center gap-2 text-sm"
+              >
+                <InstagramIcon />
+                Instagram
+              </a>
+              <a
+                href="https://linkedin.com/company/8020films"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors flex items-center gap-2 text-sm"
+              >
+                <LinkedInIcon />
+                LinkedIn
               </a>
             </div>
           </div>

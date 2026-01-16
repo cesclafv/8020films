@@ -8,3 +8,4 @@ export { QuoteFormSection } from './QuoteFormSection';
 export { WorkPageContent } from './WorkPageContent';
 export { QuotePageContent } from './QuotePageContent';
 export { LogoBannerSection } from './LogoBannerSection';
+export { FAQSection } from './FAQSection';

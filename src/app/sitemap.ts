@@ -12,6 +12,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Static pages
   const staticPages = ['', '/work', '/careers', '/quote', '/contact'];
+
+  // Location pages
+  const locationPages = ['/paris', '/london', '/los-angeles'];
+
+  // Service pages
+  const servicePages = [
+    '/services/live-streaming',
+    '/services/corporate-video',
+    '/services/brand-storytelling',
+    '/services/remote-production',
+    '/services/music-video',
+  ];
+
   const locales = ['en', 'fr'];
 
   // Generate URLs for static pages in both locales
@@ -21,6 +34,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: page === '' ? 1 : 0.8,
+    }))
+  );
+
+  // Generate URLs for location pages in both locales
+  const locationUrls = locales.flatMap((locale) =>
+    locationPages.map((page) => ({
+      url: `${baseUrl}/${locale}${page}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
+  );
+
+  // Generate URLs for service pages in both locales
+  const serviceUrls = locales.flatMap((locale) =>
+    servicePages.map((page) => ({
+      url: `${baseUrl}/${locale}${page}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     }))
   );
 
@@ -35,5 +68,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  return [...staticUrls, ...workUrls];
+  return [...staticUrls, ...locationUrls, ...serviceUrls, ...workUrls];
 }

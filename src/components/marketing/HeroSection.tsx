@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { createBrowserClient } from '@supabase/ssr';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 type VideoSettings = {
   url: string;
@@ -27,6 +28,67 @@ function getVideoEmbedUrl(url: string, type: 'vimeo' | 'youtube'): string | null
     }
   }
   return null;
+}
+
+// Helper to render description with linked city names
+function DescriptionWithLinks({ text }: { text: string }) {
+  const cityLinks: Record<string, string> = {
+    'Paris': '/paris',
+    'London': '/london',
+    'Los Angeles': '/los-angeles',
+    'Londres': '/london', // French
+  };
+
+  // Split text while keeping delimiters, but handle city names
+  const parts: (string | React.ReactNode)[] = [];
+  let remainingText = text;
+  let key = 0;
+
+  // Find all cities in the text and their positions
+  const cityMatches: { city: string; index: number; link: string }[] = [];
+  for (const [city, link] of Object.entries(cityLinks)) {
+    let searchIndex = 0;
+    while (true) {
+      const idx = remainingText.indexOf(city, searchIndex);
+      if (idx === -1) break;
+      cityMatches.push({ city, index: idx, link });
+      searchIndex = idx + city.length;
+    }
+  }
+
+  // Sort by index
+  cityMatches.sort((a, b) => a.index - b.index);
+
+  // Remove duplicates (e.g., if "London" matches but "Londres" doesn't exist)
+  const seen = new Set<number>();
+  const uniqueMatches = cityMatches.filter(m => {
+    if (seen.has(m.index)) return false;
+    seen.add(m.index);
+    return true;
+  });
+
+  // Build parts
+  let lastIndex = 0;
+  for (const match of uniqueMatches) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(
+      <Link
+        key={key++}
+        href={match.link}
+        className="underline decoration-1 underline-offset-2 hover:text-[#ff6b6b] transition-colors"
+      >
+        {match.city}
+      </Link>
+    );
+    lastIndex = match.index + match.city.length;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return <>{parts}</>;
 }
 
 export function HeroSection() {
@@ -103,7 +165,7 @@ export function HeroSection() {
           </div>
           <div className="max-w-xl bg-white/95 backdrop-blur-sm p-8 md:p-10">
             <p className="text-[#1a1a1a] text-lg md:text-xl leading-relaxed mb-6">
-              {t('description')}
+              <DescriptionWithLinks text={t('description')} />
             </p>
             <button onClick={scrollToQuote} className="btn btn-primary">
               {t('cta')}

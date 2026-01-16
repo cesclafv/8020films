@@ -19,8 +19,14 @@ export async function GET() {
       .eq('locale', 'fr')
       .single();
 
-    if (enError || frError || !enData || !frData) {
-      console.error('Error reading translations:', enError || frError);
+    const { data: esData, error: esError } = await supabase
+      .from('translations')
+      .select('messages')
+      .eq('locale', 'es')
+      .single();
+
+    if (enError || frError || esError || !enData || !frData || !esData) {
+      console.error('Error reading translations:', enError || frError || esError);
       return NextResponse.json(
         { error: 'Failed to read translations from database' },
         { status: 500 }
@@ -30,6 +36,7 @@ export async function GET() {
     return NextResponse.json({
       en: enData.messages,
       fr: frData.messages,
+      es: esData.messages,
     });
   } catch (error) {
     console.error('Error reading translations:', error);
@@ -43,11 +50,11 @@ export async function GET() {
 // POST - Save translations to Supabase and revalidate cache
 export async function POST(request: Request) {
   try {
-    const { en, fr } = await request.json();
+    const { en, fr, es } = await request.json();
 
-    if (!en || !fr) {
+    if (!en || !fr || !es) {
       return NextResponse.json(
-        { error: 'Both en and fr translations are required' },
+        { error: 'All translations (en, fr, es) are required' },
         { status: 400 }
       );
     }
@@ -82,8 +89,22 @@ export async function POST(request: Request) {
       );
     }
 
+    // Update Spanish translations
+    const { error: esError } = await supabase
+      .from('translations')
+      .update({ messages: es })
+      .eq('locale', 'es');
+
+    if (esError) {
+      console.error('Error saving Spanish translations:', esError);
+      return NextResponse.json(
+        { error: 'Failed to save Spanish translations' },
+        { status: 500 }
+      );
+    }
+
     // Revalidate the translations cache
-    revalidateTag('translations');
+    revalidateTag('translations', 'max');
 
     return NextResponse.json({ success: true });
   } catch (error) {

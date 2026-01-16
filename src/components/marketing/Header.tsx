@@ -1,19 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { locales, localeNames, type Locale } from '@/i18n/config';
 
 export function Header() {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
   const params = useParams();
-  const locale = params.locale as string;
+  const locale = params.locale as Locale;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
 
   // Check if we're on the homepage (transparent header) or subpage (dark header)
   const isHomepage = pathname === '/';
@@ -26,13 +29,24 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setIsLangMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const navLinks = [
     { href: '/work', label: t('work') },
     { href: '/careers', label: t('careers') },
     { href: '/quote', label: t('getQuote') },
   ];
 
-  const toggleLocale = locale === 'en' ? 'fr' : 'en';
+  const otherLocales = locales.filter((l) => l !== locale);
 
   const handleLogoClick = (e: React.MouseEvent) => {
     if (isHomepage) {
@@ -78,14 +92,41 @@ export function Header() {
             </Link>
           ))}
 
-          {/* Language Toggle */}
-          <Link
-            href={pathname}
-            locale={toggleLocale}
-            className="text-white/60 hover:text-white text-sm font-semibold uppercase tracking-wider transition-colors ml-4 border-l border-white/20 pl-4"
-          >
-            {toggleLocale.toUpperCase()}
-          </Link>
+          {/* Language Dropdown */}
+          <div ref={langMenuRef} className="relative ml-4 border-l border-white/20 pl-4">
+            <button
+              onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+              className="flex items-center gap-1 text-white/60 hover:text-white text-sm font-semibold uppercase tracking-wider transition-colors"
+            >
+              {locale.toUpperCase()}
+              <svg
+                className={cn(
+                  'w-3 h-3 transition-transform',
+                  isLangMenuOpen && 'rotate-180'
+                )}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {isLangMenuOpen && (
+              <div className="absolute top-full right-0 mt-2 bg-[#0a0a0a] border border-white/20 rounded-lg py-1 min-w-[100px]">
+                {otherLocales.map((l) => (
+                  <Link
+                    key={l}
+                    href={pathname}
+                    locale={l}
+                    onClick={() => setIsLangMenuOpen(false)}
+                    className="block px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    {localeNames[l]}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -166,14 +207,19 @@ export function Header() {
             {link.label}
           </Link>
         ))}
-        <Link
-          href={pathname}
-          locale={toggleLocale}
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="text-white/60 text-lg font-semibold uppercase tracking-wider mt-4 pt-4 border-t border-white/20"
-        >
-          {toggleLocale === 'en' ? 'English' : 'Français'}
-        </Link>
+        <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-white/20">
+          {otherLocales.map((l) => (
+            <Link
+              key={l}
+              href={pathname}
+              locale={l}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-white/60 text-lg font-semibold uppercase tracking-wider hover:text-white transition-colors"
+            >
+              {localeNames[l]}
+            </Link>
+          ))}
+        </div>
         </div>
       )}
     </header>

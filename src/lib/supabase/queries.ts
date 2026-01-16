@@ -13,7 +13,7 @@ export type WorkReference = {
   title: string;
   excerpt: string | null;
   body_html: string | null;
-  categories: Array<{ slug: string; name_en: string; name_fr: string }>;
+  categories: Array<{ slug: string; name_en: string; name_fr: string; name_es?: string }>;
   videos: Array<{ url: string; type: string }>;
   images: Array<{ url: string; alt: string | null }>;
 };
@@ -23,6 +23,7 @@ export type Category = {
   slug: string;
   name_en: string;
   name_fr: string;
+  name_es?: string;
   display_order: number;
 };
 

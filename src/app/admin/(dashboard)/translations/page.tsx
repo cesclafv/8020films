@@ -5,9 +5,16 @@ import { createBrowserClient } from '@supabase/ssr';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type TranslationData = Record<string, any>;
+type Locale = 'en' | 'fr' | 'es';
+
+const localeLabels: Record<Locale, string> = {
+  en: 'English',
+  fr: 'French',
+  es: 'Spanish',
+};
 
 export default function TranslationsPage() {
-  const [translations, setTranslationData] = useState<{ en: TranslationData; fr: TranslationData } | null>(null);
+  const [translations, setTranslationData] = useState<{ en: TranslationData; fr: TranslationData; es: TranslationData } | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,13 +44,20 @@ export default function TranslationsPage() {
         .eq('locale', 'fr')
         .single();
 
-      if (enError || frError || !enData || !frData) {
+      const { data: esData, error: esError } = await supabase
+        .from('translations')
+        .select('messages')
+        .eq('locale', 'es')
+        .single();
+
+      if (enError || frError || esError || !enData || !frData || !esData) {
         throw new Error('Failed to fetch translations');
       }
 
       setTranslationData({
         en: enData.messages as TranslationData,
         fr: frData.messages as TranslationData,
+        es: esData.messages as TranslationData,
       });
       // Expand all top-level sections by default
       setExpandedSections(new Set(Object.keys(enData.messages as object)));
@@ -83,7 +97,7 @@ export default function TranslationsPage() {
   };
 
   const updateTranslation = (
-    lang: 'en' | 'fr',
+    lang: Locale,
     path: string[],
     value: string
   ) => {
@@ -97,7 +111,7 @@ export default function TranslationsPage() {
     }
 
     current[path[path.length - 1]] = value;
-    setTranslationData(newTranslationData as { en: TranslationData; fr: TranslationData });
+    setTranslationData(newTranslationData as { en: TranslationData; fr: TranslationData; es: TranslationData });
   };
 
   const toggleSection = (section: string) => {
@@ -114,52 +128,40 @@ export default function TranslationsPage() {
     path: string[],
     enValue: string,
     frValue: string,
+    esValue: string,
     label: string
   ) => {
-    const isLongText = enValue.length > 100 || frValue.length > 100;
+    const isLongText = enValue.length > 100 || frValue.length > 100 || esValue.length > 100;
 
     return (
       <div key={path.join('.')} className="mb-4 p-4 bg-gray-50 rounded-lg">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           {label}
         </label>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <span className="text-xs text-gray-500 mb-1 block">English</span>
-            {isLongText ? (
-              <textarea
-                value={enValue}
-                onChange={(e) => updateTranslation('en', path, e.target.value)}
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm"
-              />
-            ) : (
-              <input
-                type="text"
-                value={enValue}
-                onChange={(e) => updateTranslation('en', path, e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm"
-              />
-            )}
-          </div>
-          <div>
-            <span className="text-xs text-gray-500 mb-1 block">French</span>
-            {isLongText ? (
-              <textarea
-                value={frValue}
-                onChange={(e) => updateTranslation('fr', path, e.target.value)}
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm"
-              />
-            ) : (
-              <input
-                type="text"
-                value={frValue}
-                onChange={(e) => updateTranslation('fr', path, e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm"
-              />
-            )}
-          </div>
+        <div className="grid grid-cols-3 gap-4">
+          {(['en', 'fr', 'es'] as Locale[]).map((lang) => {
+            const value = lang === 'en' ? enValue : lang === 'fr' ? frValue : esValue;
+            return (
+              <div key={lang}>
+                <span className="text-xs text-gray-500 mb-1 block">{localeLabels[lang]}</span>
+                {isLongText ? (
+                  <textarea
+                    value={value}
+                    onChange={(e) => updateTranslation(lang, path, e.target.value)}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm"
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={(e) => updateTranslation(lang, path, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm"
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -169,6 +171,7 @@ export default function TranslationsPage() {
     sectionKey: string,
     enSection: TranslationData,
     frSection: TranslationData,
+    esSection: TranslationData,
     parentPath: string[] = []
   ) => {
     const currentPath = [...parentPath, sectionKey];
@@ -177,14 +180,15 @@ export default function TranslationsPage() {
     const renderContent = (
       enObj: TranslationData,
       frObj: TranslationData,
+      esObj: TranslationData,
       path: string[],
       key: string
     ): React.ReactNode => {
-      if (typeof enObj === 'string' && typeof frObj === 'string') {
-        return renderField(path, enObj, frObj, key);
+      if (typeof enObj === 'string' && typeof frObj === 'string' && typeof esObj === 'string') {
+        return renderField(path, enObj, frObj, esObj, key);
       }
 
-      if (typeof enObj === 'object' && typeof frObj === 'object') {
+      if (typeof enObj === 'object' && typeof frObj === 'object' && typeof esObj === 'object') {
         return (
           <div key={path.join('.')} className="mb-4">
             <h4 className="text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wide">
@@ -195,6 +199,7 @@ export default function TranslationsPage() {
                 renderContent(
                   (enObj as Record<string, TranslationData>)[subKey],
                   (frObj as Record<string, TranslationData>)[subKey],
+                  (esObj as Record<string, TranslationData>)[subKey],
                   [...path, subKey],
                   subKey
                 )
@@ -235,6 +240,7 @@ export default function TranslationsPage() {
               renderContent(
                 enSection[key],
                 frSection[key],
+                esSection[key],
                 [sectionKey, key],
                 key
               )
@@ -266,7 +272,7 @@ export default function TranslationsPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold">Translations</h1>
-          <p className="text-gray-600 mt-1">Edit website text for English and French</p>
+          <p className="text-gray-600 mt-1">Edit website text for English, French, and Spanish</p>
         </div>
         <button
           onClick={handleSave}
@@ -301,7 +307,8 @@ export default function TranslationsPage() {
           renderSection(
             sectionKey,
             translations.en[sectionKey] as TranslationData,
-            translations.fr[sectionKey] as TranslationData
+            translations.fr[sectionKey] as TranslationData,
+            translations.es[sectionKey] as TranslationData
           )
         )}
       </div>

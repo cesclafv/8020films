@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: {
         en: `${baseUrl}/en`,
         fr: `${baseUrl}/fr`,
+        es: `${baseUrl}/es`,
         'x-default': `${baseUrl}/en`,
       },
     },
@@ -48,8 +49,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `${baseUrl}/${locale}`,
       siteName: '8020 Films',
-      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
-      alternateLocale: locale === 'fr' ? 'en_US' : 'fr_FR',
+      locale: locale === 'fr' ? 'fr_FR' : locale === 'es' ? 'es_ES' : 'en_US',
+      alternateLocale: ['en_US', 'fr_FR', 'es_ES'].filter((l) => !l.startsWith(locale)),
       type: 'website',
       images: [
         {

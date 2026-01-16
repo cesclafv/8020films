@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: Props) {
       languages: {
         en: `${baseUrl}/en/work/${slug}`,
         fr: `${baseUrl}/fr/work/${slug}`,
+        es: `${baseUrl}/es/work/${slug}`,
         'x-default': `${baseUrl}/en/work/${slug}`,
       },
     },
@@ -48,8 +49,8 @@ export async function generateMetadata({ params }: Props) {
       description,
       url: `${baseUrl}/${locale}/work/${slug}`,
       siteName: '8020 Films',
-      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
-      alternateLocale: locale === 'fr' ? 'en_US' : 'fr_FR',
+      locale: locale === 'fr' ? 'fr_FR' : locale === 'es' ? 'es_ES' : 'en_US',
+      alternateLocale: ['en_US', 'fr_FR', 'es_ES'].filter(l => l !== (locale === 'fr' ? 'fr_FR' : locale === 'es' ? 'es_ES' : 'en_US')),
       type: 'article',
       images: [
         {
@@ -116,7 +117,7 @@ export default async function WorkReferencePage({ params }: Props) {
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: `${baseUrl}/${locale}` },
-          { name: locale === 'fr' ? 'Projets' : 'Work', url: `${baseUrl}/${locale}/work` },
+          { name: locale === 'fr' ? 'Projets' : locale === 'es' ? 'Proyectos' : 'Work', url: `${baseUrl}/${locale}/work` },
           { name: workReference.title },
         ]}
       />
@@ -189,7 +190,7 @@ export default async function WorkReferencePage({ params }: Props) {
               <span className="text-[#6b7280] block mb-1">{t('category')}</span>
               <span className="font-semibold">
                 {workReference.categories
-                  .map((cat) => (locale === 'fr' ? cat.name_fr : cat.name_en))
+                  .map((cat) => (locale === 'fr' ? cat.name_fr : locale === 'es' ? (cat.name_es || cat.name_en) : cat.name_en))
                   .join(', ')}
               </span>
             </div>
