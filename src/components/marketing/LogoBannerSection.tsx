@@ -38,39 +38,39 @@ export function LogoBannerSection() {
   const shuffledLogos = useMemo(() => shuffleArray(LOGOS), []);
 
   return (
-    <section className="py-16 bg-[#f8f8f8] overflow-hidden">
+    <section className="py-16 bg-white overflow-hidden">
       <div className="relative">
-        <div className="flex animate-scroll">
+        <div className="flex animate-scroll-mobile md:animate-scroll">
           {/* First set of logos */}
-          <div className="flex shrink-0 items-center gap-16 px-8">
+          <div className="flex shrink-0 items-center gap-12 md:gap-16 px-6 md:px-8">
             {shuffledLogos.map((logo, index) => (
               <div
                 key={`logo-1-${index}`}
-                className="relative h-12 w-32 shrink-0 grayscale opacity-60 hover:opacity-80 transition-opacity"
+                className="relative h-14 w-36 md:h-16 md:w-40 shrink-0 grayscale opacity-60 hover:opacity-80 transition-opacity"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
                   fill
                   className="object-contain"
-                  sizes="128px"
+                  sizes="160px"
                 />
               </div>
             ))}
           </div>
           {/* Duplicate set for seamless loop */}
-          <div className="flex shrink-0 items-center gap-16 px-8">
+          <div className="flex shrink-0 items-center gap-12 md:gap-16 px-6 md:px-8">
             {shuffledLogos.map((logo, index) => (
               <div
                 key={`logo-2-${index}`}
-                className="relative h-12 w-32 shrink-0 grayscale opacity-60 hover:opacity-80 transition-opacity"
+                className="relative h-14 w-36 md:h-16 md:w-40 shrink-0 grayscale opacity-60 hover:opacity-80 transition-opacity"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
                   fill
                   className="object-contain"
-                  sizes="128px"
+                  sizes="160px"
                 />
               </div>
             ))}
