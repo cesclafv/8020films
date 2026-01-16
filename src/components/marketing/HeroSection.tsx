@@ -71,7 +71,7 @@ export function HeroSection() {
     : null;
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-[100dvh] w-full overflow-hidden bg-black">
       {/* Video Background */}
       <div className="absolute inset-0 bg-black">
         {/* Black cover that hides video loading state */}
@@ -114,7 +114,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <div className="absolute bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
