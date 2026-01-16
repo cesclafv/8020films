@@ -1,6 +1,6 @@
 {
   "Metadata": {
-    "title": "8020 Films | Société de Production Vidéo | Paris, Londres, Los Angeles",
+    "title": "8020 Films | Société de Production Vidéo",
     "description": "Basé à Paris, Londres et Los Angeles. Production vidéo pour les agences et marques les plus renommées au monde."
   },
   "Navigation": {
@@ -13,6 +13,7 @@
     "followUs": "Suivez-nous",
     "connect": "Contact",
     "contactUs": "Contactez-nous",
+    "getQuote": "Obtenir un Devis",
     "login": "Connexion",
     "newsletter": "Newsletter",
     "emailPlaceholder": "Votre email",
@@ -130,7 +131,8 @@
     "ctaTitle": "Envie de travailler ensemble ?",
     "ctaDescription": "Donnons vie à votre vision - contactez nous.",
     "ctaButton": "Obtenir un Devis",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "relatedProjects": "Projets similaires"
   },
   "QuotePage": {
     "metaTitle": "Obtenir un Devis | 8020 Films",
@@ -139,7 +141,20 @@
     "intro1": "Avec des équipes sur trois continents dans certaines des villes les plus dynamiques du monde, nous sommes probablement plus proches que vous ne le pensez.",
     "intro2": "Nous aimons les rencontres en personne où les idées fusent plus librement que le café. Envoyez-nous vos idées et nous vous répondrons avec un devis.",
     "emailLabel": "Envie d'écrire ?",
-    "formTitle": "Obtenir un Devis"
+    "formTitle": "Obtenir un Devis",
+    "officesTitle": "Nos Bureaux",
+    "hours": "Horaires"
+  },
+  "ContactPage": {
+    "metaTitle": "Contactez-nous | 8020 Films",
+    "metaDescription": "Contactez 8020 Films. Bureaux à Los Angeles et Londres. Notre temps de réponse moyen est d'une heure.",
+    "title": "Contactez-nous.",
+    "intro1": "Avec des équipes sur trois continents dans certaines des villes les plus dynamiques du monde, nous sommes probablement plus proches que vous ne le pensez.",
+    "intro2": "Que vous ayez un projet en tête ou que vous souhaitiez simplement nous dire bonjour, nous serions ravis de vous entendre.",
+    "emailLabel": "Écrivez-nous",
+    "formTitle": "Envoyer un message",
+    "officesTitle": "Nos Bureaux",
+    "hours": "Horaires"
   },
   "CareersPage": {
     "metaTitle": "Recrutement | 8020 Films",

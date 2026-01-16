@@ -178,6 +178,63 @@ export async function getAllWorkReferenceSlugs(): Promise<string[]> {
   return data?.map((item) => item.slug) || [];
 }
 
+// Get all work references with images for sitemap
+export async function getAllWorkReferencesForSitemap(): Promise<
+  Array<{ slug: string; featured_image_url: string | null; updated_at: string | null }>
+> {
+  const supabase = createSupabaseBuildClient();
+
+  const { data, error } = await supabase
+    .from('work_references')
+    .select('slug, featured_image_url, updated_at');
+
+  if (error) {
+    console.error('Error fetching work references for sitemap:', error);
+    return [];
+  }
+
+  return data || [];
+}
+
+// Get related work references (same category, excluding current)
+export async function getRelatedWorkReferences(
+  currentSlug: string,
+  categorySlug: string,
+  locale: string,
+  limit: number = 3
+): Promise<WorkReference[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('work_references_with_translations')
+    .select('*')
+    .eq('locale', locale)
+    .neq('slug', currentSlug)
+    .limit(limit * 2); // Fetch more to filter by category
+
+  if (error) {
+    console.error('Error fetching related work references:', error);
+    return [];
+  }
+
+  // Filter by category and limit
+  const filtered = (data || [])
+    .filter((item) =>
+      item.categories.some((cat: { slug: string }) => cat.slug === categorySlug)
+    )
+    .slice(0, limit);
+
+  // If not enough related items, fill with other work
+  if (filtered.length < limit) {
+    const others = (data || [])
+      .filter((item) => !filtered.some((f) => f.slug === item.slug))
+      .slice(0, limit - filtered.length);
+    return [...filtered, ...others];
+  }
+
+  return filtered;
+}
+
 // Submit a quote request
 export async function submitQuoteRequest(formData: {
   company: string;

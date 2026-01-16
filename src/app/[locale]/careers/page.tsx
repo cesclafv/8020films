@@ -9,10 +9,30 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'CareersPage' });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
+
+  const title = t('metaTitle');
+  const description = t('metaDescription');
 
   return {
-    title: t('metaTitle'),
-    description: t('metaDescription'),
+    title,
+    description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/careers`,
+      languages: {
+        en: `${baseUrl}/en/careers`,
+        fr: `${baseUrl}/fr/careers`,
+        'x-default': `${baseUrl}/en/careers`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/careers`,
+      siteName: '8020 Films',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      type: 'website',
+    },
   };
 }
 

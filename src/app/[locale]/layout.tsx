@@ -6,6 +6,7 @@ import { Open_Sans } from 'next/font/google';
 import { locales } from '@/i18n/config';
 import '../globals.css';
 import { Providers } from '@/components/providers/Providers';
+import { OrganizationJsonLd, WebSiteJsonLd, LocalBusinessJsonLd } from '@/components/seo/JsonLd';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -28,10 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
+  const title = t('title');
+  const description = t('description');
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title,
+    description,
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {
@@ -39,6 +42,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         fr: `${baseUrl}/fr`,
         'x-default': `${baseUrl}/en`,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}`,
+      siteName: '8020 Films',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      alternateLocale: locale === 'fr' ? 'en_US' : 'fr_FR',
+      type: 'website',
+      images: [
+        {
+          url: `${baseUrl}/img/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: '8020 Films - Video Production Company',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}/img/og-image.jpg`],
     },
   };
 }
@@ -56,7 +82,18 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} suppressHydrationWarning className={openSans.variable}>
+      <head>
+        {/* Preconnect to external domains for faster video loading */}
+        <link rel="preconnect" href="https://player.vimeo.com" />
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://i.vimeocdn.com" />
+        <link rel="dns-prefetch" href="https://player.vimeo.com" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+      </head>
       <body className="font-sans">
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
+        <LocalBusinessJsonLd />
         <NextIntlClientProvider messages={messages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>

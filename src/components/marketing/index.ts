@@ -7,3 +7,4 @@ export { CaseStudySection } from './CaseStudySection';
 export { QuoteFormSection } from './QuoteFormSection';
 export { WorkPageContent } from './WorkPageContent';
 export { QuotePageContent } from './QuotePageContent';
+export { LogoBannerSection } from './LogoBannerSection';

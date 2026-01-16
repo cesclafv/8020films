@@ -34,6 +34,13 @@ export function Header() {
 
   const toggleLocale = locale === 'en' ? 'fr' : 'en';
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (isHomepage) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -45,7 +52,7 @@ export function Header() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="relative z-[70]">
+        <Link href="/" onClick={handleLogoClick} className="relative z-[70]">
           <Image
             src="/img/logo-8020Films-horizontal_white_1000px.png"
             alt="8020 Films"
@@ -118,7 +125,7 @@ export function Header() {
         >
           {/* Close button and logo header */}
           <div className="absolute top-0 left-0 right-0 px-6 py-6 flex items-center justify-between">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/" onClick={(e) => { handleLogoClick(e); setIsMobileMenuOpen(false); }}>
               <Image
                 src="/img/logo-8020Films-horizontal_white_1000px.png"
                 alt="8020 Films"

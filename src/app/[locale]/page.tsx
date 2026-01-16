@@ -5,6 +5,7 @@ import {
   HeroSection,
   CapabilitiesSection,
   QuoteFormSection,
+  LogoBannerSection,
 } from '@/components/marketing';
 import { WorkGridSectionServer } from '@/components/marketing/WorkGridSectionServer';
 import { CaseStudySectionServer } from '@/components/marketing/CaseStudySectionServer';
@@ -24,6 +25,7 @@ export default async function HomePage({ params }: Props) {
         <HeroSection />
         <WorkGridSectionServer locale={locale} />
         <CapabilitiesSection />
+        <LogoBannerSection />
         <CaseStudySectionServer locale={locale} />
         <QuoteFormSection />
       </main>

@@ -4,8 +4,10 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Header, Footer } from '@/components/marketing';
 import { ImageGallery } from '@/components/marketing/ImageGallery';
+import { RelatedProjects } from '@/components/marketing/RelatedProjects';
 import { Link } from '@/i18n/navigation';
-import { getWorkReferenceBySlug, getAllWorkReferenceSlugs } from '@/lib/supabase/queries';
+import { getWorkReferenceBySlug, getAllWorkReferenceSlugs, getRelatedWorkReferences } from '@/lib/supabase/queries';
+import { VideoJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -20,14 +22,50 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
   const workReference = await getWorkReferenceBySlug(slug, locale);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
 
   if (!workReference) {
     return { title: 'Not Found' };
   }
 
+  const title = `${workReference.title} | 8020 Films`;
+  const description = workReference.excerpt || `${workReference.title} - Video production by 8020 Films`;
+  const ogImage = workReference.featured_image_url || `${baseUrl}/img/og-image.jpg`;
+
   return {
-    title: `${workReference.title} | 8020 Films`,
-    description: workReference.excerpt,
+    title,
+    description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/work/${slug}`,
+      languages: {
+        en: `${baseUrl}/en/work/${slug}`,
+        fr: `${baseUrl}/fr/work/${slug}`,
+        'x-default': `${baseUrl}/en/work/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/work/${slug}`,
+      siteName: '8020 Films',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      alternateLocale: locale === 'fr' ? 'en_US' : 'fr_FR',
+      type: 'article',
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: workReference.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -64,8 +102,34 @@ export default async function WorkReferencePage({ params }: Props) {
     ? getVideoEmbed(primaryVideo.url, primaryVideo.type)
     : null;
 
+  // Get related projects based on first category
+  const primaryCategory = workReference.categories[0]?.slug;
+  const relatedProjects = primaryCategory
+    ? await getRelatedWorkReferences(slug, primaryCategory, locale, 3)
+    : [];
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
+
   return (
     <>
+      {/* Structured Data */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: `${baseUrl}/${locale}` },
+          { name: locale === 'fr' ? 'Projets' : 'Work', url: `${baseUrl}/${locale}/work` },
+          { name: workReference.title },
+        ]}
+      />
+      {primaryVideo && videoEmbedUrl && (
+        <VideoJsonLd
+          name={workReference.title}
+          description={workReference.excerpt || `${workReference.title} - Video production by 8020 Films`}
+          thumbnailUrl={workReference.featured_image_url || `${baseUrl}/img/og-image.jpg`}
+          contentUrl={primaryVideo.url}
+          embedUrl={videoEmbedUrl}
+        />
+      )}
+
       <Header />
       <main className="pt-24 pb-20">
         <article className="container mx-auto px-6">
@@ -156,6 +220,13 @@ export default async function WorkReferencePage({ params }: Props) {
             images={workReference.images}
             title={workReference.title}
             galleryLabel={t('gallery')}
+          />
+
+          {/* Related Projects */}
+          <RelatedProjects
+            projects={relatedProjects}
+            title={t('relatedProjects')}
+            locale={locale}
           />
 
           {/* CTA */}

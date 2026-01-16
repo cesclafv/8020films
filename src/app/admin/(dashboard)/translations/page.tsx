@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createBrowserClient } from '@supabase/ssr';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type TranslationData = Record<string, any>;
 
-export default function TranslationDataPage() {
+export default function TranslationsPage() {
   const [translations, setTranslationData] = useState<{ en: TranslationData; fr: TranslationData } | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -13,18 +14,39 @@ export default function TranslationDataPage() {
   const [success, setSuccess] = useState(false);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
 
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
   useEffect(() => {
     fetchTranslationData();
   }, []);
 
   const fetchTranslationData = async () => {
     try {
-      const res = await fetch('/api/admin/translations');
-      if (!res.ok) throw new Error('Failed to fetch translations');
-      const data = await res.json();
-      setTranslationData(data);
+      const { data: enData, error: enError } = await supabase
+        .from('translations')
+        .select('messages')
+        .eq('locale', 'en')
+        .single();
+
+      const { data: frData, error: frError } = await supabase
+        .from('translations')
+        .select('messages')
+        .eq('locale', 'fr')
+        .single();
+
+      if (enError || frError || !enData || !frData) {
+        throw new Error('Failed to fetch translations');
+      }
+
+      setTranslationData({
+        en: enData.messages as TranslationData,
+        fr: frData.messages as TranslationData,
+      });
       // Expand all top-level sections by default
-      setExpandedSections(new Set(Object.keys(data.en)));
+      setExpandedSections(new Set(Object.keys(enData.messages as object)));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load translations');
     } finally {
@@ -39,13 +61,18 @@ export default function TranslationDataPage() {
     setSuccess(false);
 
     try {
-      const res = await fetch('/api/admin/translations', {
+      // Use API route to save and trigger cache revalidation
+      const response = await fetch('/api/admin/translations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(translations),
       });
 
-      if (!res.ok) throw new Error('Failed to save translations');
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to save translations');
+      }
+
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
@@ -238,7 +265,7 @@ export default function TranslationDataPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">TranslationData</h1>
+          <h1 className="text-2xl font-bold">Translations</h1>
           <p className="text-gray-600 mt-1">Edit website text for English and French</p>
         </div>
         <button
@@ -265,7 +292,7 @@ export default function TranslationDataPage() {
 
       {success && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
-          TranslationData saved successfully!
+          Translations saved successfully! Changes should appear immediately.
         </div>
       )}
 

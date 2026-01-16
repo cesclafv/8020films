@@ -9,7 +9,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'QuotePage' });
+  const t = await getTranslations({ locale, namespace: 'ContactPage' });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://8020films.com';
 
   const title = t('metaTitle');
@@ -19,17 +19,17 @@ export async function generateMetadata({ params }: Props) {
     title,
     description,
     alternates: {
-      canonical: `${baseUrl}/${locale}/quote`,
+      canonical: `${baseUrl}/${locale}/contact`,
       languages: {
-        en: `${baseUrl}/en/quote`,
-        fr: `${baseUrl}/fr/quote`,
-        'x-default': `${baseUrl}/en/quote`,
+        en: `${baseUrl}/en/contact`,
+        fr: `${baseUrl}/fr/contact`,
+        'x-default': `${baseUrl}/en/contact`,
       },
     },
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/${locale}/quote`,
+      url: `${baseUrl}/${locale}/contact`,
       siteName: '8020 Films',
       locale: locale === 'fr' ? 'fr_FR' : 'en_US',
       type: 'website',
@@ -37,11 +37,11 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function QuotePage({ params }: Props) {
+export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('QuotePage');
+  const t = await getTranslations('ContactPage');
 
   return (
     <>

@@ -1,6 +1,6 @@
 {
   "Metadata": {
-    "title": "8020 Films | Video Production Company | Paris, London, Los Angeles",
+    "title": "8020 Films | Video Production Company",
     "description": "Based in Paris, London & Los Angeles. Best-in-class video production for the world's most renowned agencies and brands."
   },
   "Navigation": {
@@ -13,6 +13,7 @@
     "followUs": "Follow Us",
     "connect": "Connect",
     "contactUs": "Contact Us",
+    "getQuote": "Get a Quote",
     "login": "Login",
     "newsletter": "Newsletter",
     "emailPlaceholder": "Your email",
@@ -130,7 +131,8 @@
     "ctaTitle": "Interested in working together?",
     "ctaDescription": "Let's discuss how we can bring your vision to life.",
     "ctaButton": "Get a Quote",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "relatedProjects": "Related Projects"
   },
   "QuotePage": {
     "metaTitle": "Get a Quote | 8020 Films",
@@ -139,7 +141,20 @@
     "intro1": "With teams across three continents in some of the world's most vibrant cities, we're probably closer than you think.",
     "intro2": "We're all about those face-to-face meetings where ideas flow more freely than the coffee. Drop us a line with your ideas and we'll get back to you with a quote.",
     "emailLabel": "Want to write?",
-    "formTitle": "Get a Quote"
+    "formTitle": "Get a Quote",
+    "officesTitle": "Our Offices",
+    "hours": "Hours"
+  },
+  "ContactPage": {
+    "metaTitle": "Contact Us | 8020 Films",
+    "metaDescription": "Get in touch with 8020 Films. Offices in Los Angeles and London. Our average reply time is within the hour.",
+    "title": "Contact us.",
+    "intro1": "With teams across three continents in some of the world's most vibrant cities, we're probably closer than you think.",
+    "intro2": "Whether you have a project in mind or just want to say hello, we'd love to hear from you.",
+    "emailLabel": "Email us",
+    "formTitle": "Send a Message",
+    "officesTitle": "Our Offices",
+    "hours": "Hours"
   },
   "CareersPage": {
     "metaTitle": "Careers | 8020 Films",

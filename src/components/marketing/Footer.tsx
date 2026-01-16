@@ -88,10 +88,16 @@ export function Footer() {
             </h4>
             <div className="flex flex-col gap-3">
               <Link
-                href="/quote"
+                href="/contact"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 {t('contactUs')}
+              </Link>
+              <Link
+                href="/quote"
+                className="text-white/60 hover:text-white transition-colors"
+              >
+                {t('getQuote')}
               </Link>
               <a
                 href="/admin/login"

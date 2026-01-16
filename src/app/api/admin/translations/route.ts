@@ -1,18 +1,35 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { createSupabaseBuildClient } from '@/lib/supabase/server';
+import { revalidateTag } from 'next/cache';
 
-const MESSAGES_DIR = path.join(process.cwd(), 'messages');
-
-// GET - Read translation files
+// GET - Read translations from Supabase
 export async function GET() {
   try {
-    const enContent = await fs.readFile(path.join(MESSAGES_DIR, 'en.json'), 'utf-8');
-    const frContent = await fs.readFile(path.join(MESSAGES_DIR, 'fr.json'), 'utf-8');
+    const supabase = createSupabaseBuildClient();
+
+    const { data: enData, error: enError } = await supabase
+      .from('translations')
+      .select('messages')
+      .eq('locale', 'en')
+      .single();
+
+    const { data: frData, error: frError } = await supabase
+      .from('translations')
+      .select('messages')
+      .eq('locale', 'fr')
+      .single();
+
+    if (enError || frError || !enData || !frData) {
+      console.error('Error reading translations:', enError || frError);
+      return NextResponse.json(
+        { error: 'Failed to read translations from database' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
-      en: JSON.parse(enContent),
-      fr: JSON.parse(frContent),
+      en: enData.messages,
+      fr: frData.messages,
     });
   } catch (error) {
     console.error('Error reading translations:', error);
@@ -23,7 +40,7 @@ export async function GET() {
   }
 }
 
-// POST - Save translation files
+// POST - Save translations to Supabase and revalidate cache
 export async function POST(request: Request) {
   try {
     const { en, fr } = await request.json();
@@ -35,23 +52,44 @@ export async function POST(request: Request) {
       );
     }
 
-    // Write with pretty formatting
-    await fs.writeFile(
-      path.join(MESSAGES_DIR, 'en.json'),
-      JSON.stringify(en, null, 2),
-      'utf-8'
-    );
-    await fs.writeFile(
-      path.join(MESSAGES_DIR, 'fr.json'),
-      JSON.stringify(fr, null, 2),
-      'utf-8'
-    );
+    const supabase = createSupabaseBuildClient();
+
+    // Update English translations
+    const { error: enError } = await supabase
+      .from('translations')
+      .update({ messages: en })
+      .eq('locale', 'en');
+
+    if (enError) {
+      console.error('Error saving English translations:', enError);
+      return NextResponse.json(
+        { error: 'Failed to save English translations' },
+        { status: 500 }
+      );
+    }
+
+    // Update French translations
+    const { error: frError } = await supabase
+      .from('translations')
+      .update({ messages: fr })
+      .eq('locale', 'fr');
+
+    if (frError) {
+      console.error('Error saving French translations:', frError);
+      return NextResponse.json(
+        { error: 'Failed to save French translations' },
+        { status: 500 }
+      );
+    }
+
+    // Revalidate the translations cache
+    revalidateTag('translations');
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error saving translations:', error);
     return NextResponse.json(
-      { error: 'Failed to save translations - make sure to edit on localhost and rebuild' },
+      { error: 'Failed to save translations' },
       { status: 500 }
     );
   }
