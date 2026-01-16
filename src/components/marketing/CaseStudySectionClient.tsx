@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
@@ -52,8 +52,23 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
 
   const [scrollIndex, setScrollIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const leftColumnRef = useRef<HTMLDivElement>(null);
+  const [leftColumnHeight, setLeftColumnHeight] = useState<number | null>(null);
   const visibleCount = 3;
   const maxIndex = Math.max(0, allThumbnailImages.length - visibleCount);
+
+  // Measure left column height to constrain right column
+  useEffect(() => {
+    const updateHeight = () => {
+      if (leftColumnRef.current) {
+        setLeftColumnHeight(leftColumnRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
@@ -92,9 +107,9 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
         </h2>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
           {/* Left column: Content (2/3 width) */}
-          <div className="lg:col-span-2">
+          <div ref={leftColumnRef} className="lg:col-span-2">
             {/* Hero Video or Image */}
             {videoEmbedUrl ? (
               <div className="aspect-video bg-black mb-8 overflow-hidden rounded-xl">
@@ -151,9 +166,12 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
 
           {/* Right column: Thumbnail images with scroll arrows (hidden on mobile) */}
           {allThumbnailImages.length > 0 && (
-            <div className="hidden lg:flex flex-col h-full">
+            <div
+              className="hidden lg:flex flex-col"
+              style={leftColumnHeight ? { height: leftColumnHeight } : undefined}
+            >
               {/* Up Arrow - only show after scrolling down */}
-              {scrollIndex > 0 ? (
+              {scrollIndex > 0 && (
                 <div className="h-10 flex items-center justify-center flex-shrink-0">
                   <button
                     onClick={scrollUp}
@@ -175,8 +193,6 @@ export function CaseStudySectionClient({ caseStudy, locale }: Props) {
                     </svg>
                   </button>
                 </div>
-              ) : (
-                <div className="h-10 flex-shrink-0" />
               )}
 
               {/* Scrollable Images Container */}

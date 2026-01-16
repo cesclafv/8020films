@@ -1,6 +1,6 @@
 {
   "Metadata": {
-    "title": "8020 Films | Société de Production Vidéo",
+    "title": "8020 Films | Société de Production Vidéo | Paris, Londres, Los Angeles",
     "description": "Basé à Paris, Londres et Los Angeles. Production vidéo pour les agences et marques les plus renommées au monde."
   },
   "Navigation": {
@@ -123,12 +123,12 @@
     "noResults": "Aucun projet trouvé pour cette catégorie."
   },
   "WorkReferencePage": {
-    "backToWork": "Retour aux Projets",
+    "backToWork": "Voir nos autres projets",
     "client": "Client",
     "category": "Catégorie",
     "year": "Année",
     "ctaTitle": "Envie de travailler ensemble ?",
-    "ctaDescription": "Discutons de la façon dont nous pouvons donner vie à votre vision.",
+    "ctaDescription": "Donnons vie à votre vision - contactez nous.",
     "ctaButton": "Obtenir un Devis",
     "gallery": "Galerie"
   },
