@@ -46,7 +46,7 @@ export function LogoBannerSection() {
       <div className="relative">
         <div className="flex animate-scroll-mobile md:animate-scroll">
           {/* First set of logos */}
-          <div className="flex shrink-0 items-center gap-12 md:gap-16 px-6 md:px-8">
+          <div className="flex shrink-0 items-center gap-8 md:gap-10 px-4 md:px-6">
             {shuffledLogos.map((logo, index) => (
               <div
                 key={`logo-1-${index}`}
@@ -63,7 +63,7 @@ export function LogoBannerSection() {
             ))}
           </div>
           {/* Duplicate set for seamless loop */}
-          <div className="flex shrink-0 items-center gap-12 md:gap-16 px-6 md:px-8">
+          <div className="flex shrink-0 items-center gap-8 md:gap-10 px-4 md:px-6">
             {shuffledLogos.map((logo, index) => (
               <div
                 key={`logo-2-${index}`}

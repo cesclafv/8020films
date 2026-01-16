@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
-import { Header, Footer } from '@/components/marketing';
+import { Header, Footer, LogoBannerSection } from '@/components/marketing';
 import { WorkPageContent } from '@/components/marketing/WorkPageContent';
 import { getWorkReferences, getCategories } from '@/lib/supabase/queries';
 
@@ -57,6 +57,7 @@ export default async function WorkPage({ params }: Props) {
           locale={locale}
         />
       </main>
+      <LogoBannerSection />
       <Footer />
     </>
   );
