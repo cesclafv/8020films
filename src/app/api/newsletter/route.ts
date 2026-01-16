@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { subscribeToNewsletter } from '@/lib/supabase/queries';
+import { sendNewsletterWelcome } from '@/lib/email';
 
 export async function POST(request: Request) {
   try {
@@ -20,6 +21,9 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    // Send welcome email (don't fail the request if email fails)
+    await sendNewsletterWelcome(body.email);
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -45,7 +45,7 @@ export function Header() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="relative z-10">
+        <Link href="/" className="relative z-[70]">
           <Image
             src="/img/logo-8020Films-horizontal_white_1000px.png"
             alt="8020 Films"
@@ -84,7 +84,7 @@ export function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden relative z-10 p-2"
+          className="md:hidden relative z-[70] p-2"
           aria-label="Toggle menu"
         >
           <div className="w-6 h-5 flex flex-col justify-between">
@@ -112,7 +112,7 @@ export function Header() {
         {/* Mobile Menu */}
         <div
           className={cn(
-            'fixed inset-0 bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 transition-opacity duration-300 md:hidden',
+            'fixed inset-0 z-[60] bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 transition-opacity duration-300 md:hidden',
             isMobileMenuOpen
               ? 'opacity-100 pointer-events-auto'
               : 'opacity-0 pointer-events-none'

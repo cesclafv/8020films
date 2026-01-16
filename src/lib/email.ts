@@ -16,6 +16,40 @@ type QuoteEmailData = {
   how_heard: string | null;
 };
 
+export async function sendNewsletterWelcome(email: string) {
+  if (!resend) {
+    console.warn('RESEND_API_KEY not configured, skipping email notification');
+    return { success: false, error: 'Email not configured' };
+  }
+
+  try {
+    await resend.emails.send({
+      from: '8020 Films <hello@8020films.com>',
+      to: email,
+      subject: 'Welcome to 8020 Films Newsletter',
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2>Welcome to the 8020 Films Newsletter!</h2>
+          <p>Thank you for subscribing to our newsletter.</p>
+          <p>You'll be the first to know about our latest projects, behind-the-scenes content, and industry insights from our team in Paris, London, and Los Angeles.</p>
+          <p>In the meantime, feel free to explore our <a href="https://8020films.com/work">latest work</a>.</p>
+          <p>Best regards,<br>The 8020 Films Team</p>
+          <hr style="margin-top: 24px; border: none; border-top: 1px solid #ddd;">
+          <p style="color: #666; font-size: 12px;">
+            8020 Films | Paris • London • Los Angeles<br>
+            <a href="https://8020films.com">8020films.com</a>
+          </p>
+        </div>
+      `,
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to send newsletter welcome email:', error);
+    return { success: false, error: 'Failed to send email' };
+  }
+}
+
 export async function sendQuoteNotification(data: QuoteEmailData) {
   if (!resend) {
     console.warn('RESEND_API_KEY not configured, skipping email notification');
