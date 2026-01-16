@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import type { CookieOptions } from '@supabase/ssr';
 import { requireEnv } from '@/lib/env';
 
@@ -30,5 +31,16 @@ export async function createSupabaseServerClient() {
         },
       },
     },
+  );
+}
+
+/**
+ * Simple Supabase client for build-time operations (generateStaticParams, etc.)
+ * Does not use cookies - only for public data access.
+ */
+export function createSupabaseBuildClient() {
+  return createClient(
+    requireEnv('NEXT_PUBLIC_SUPABASE_URL'),
+    requireEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY')
   );
 }

@@ -1,14 +1,20 @@
 import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   images: {
-    // Update this for your Supabase Storage hostname once you have it.
-    // Example: "xyzcompany.supabase.co"
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'PLACEHOLDER.supabase.co',
+        hostname: 'lgoffwknqixzrpdpulbn.supabase.co',
         pathname: '/storage/v1/object/public/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bombiefilms.com',
+        pathname: '/wp-content/uploads/**',
       },
     ],
   },
@@ -30,4 +36,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

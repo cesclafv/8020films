@@ -1,0 +1,158 @@
+{
+  "Metadata": {
+    "title": "8020 Films | Société de Production Vidéo",
+    "description": "Basés à Paris, Londres et Los Angeles. Production vidéo haut de gamme pour les agences et marques les plus renommées au monde."
+  },
+  "Navigation": {
+    "work": "Projets",
+    "careers": "Recrutement",
+    "getQuote": "Obtenir un Devis"
+  },
+  "Footer": {
+    "tagline": "Production vidéo haut de gamme sur trois continents.",
+    "followUs": "Suivez-nous",
+    "connect": "Contact",
+    "contactUs": "Contactez-nous",
+    "login": "Connexion",
+    "newsletter": "Newsletter",
+    "emailPlaceholder": "Votre email",
+    "newsletterSuccess": "Merci pour votre inscription !",
+    "allRightsReserved": "Tous droits réservés."
+  },
+  "HomePage": {
+    "hero": {
+      "description": "Basés à Paris, Londres et Los Angeles, nous pouvons vous accompagner dans vos productions vidéo partout dans le monde avec nos équipes de professionnels triés sur le volet. Des contenus d'excellence pour les agences et marques les plus renommées au monde.",
+      "cta": "Obtenir un Devis"
+    },
+    "work": {
+      "title": "Nos réalisations.",
+      "viewAll": "Voir Tous Nos Projets"
+    },
+    "capabilities": {
+      "title": "Nos expertises.",
+      "scopeBudget": {
+        "title": "Cadrage & Budget",
+        "description": "Nous travaillons avec vous pour définir un périmètre de projet clair et aligner les budgets avant le début de la production. Sans surprises, une exécution fluide."
+      },
+      "fullService": {
+        "title": "Production Complète",
+        "description": "Des équipes complètes incluant directeur photo, éclairage, machiniste, maquillage, post-production et animation. Tout ce dont vous avez besoin, centralisé."
+      },
+      "liveStreaming": {
+        "title": "Streaming & Événements",
+        "description": "Des festivals aux conférences d'entreprise, nous assurons des diffusions en direct impeccables qui captivent les audiences du monde entier."
+      },
+      "music": {
+        "title": "Musique",
+        "description": "Clips musicaux, captations de concerts et contenus artistiques qui capturent l'énergie et l'émotion des performances live."
+      },
+      "brandStorytelling": {
+        "title": "Storytelling de Marque",
+        "description": "Des récits captivants qui connectent votre marque à vos audiences grâce à un contenu visuel authentique et émotionnellement résonnant."
+      },
+      "remoteProduction": {
+        "title": "Production à Distance",
+        "description": "Avec nos kits de tournage connectés, supervisez vos productions à distance depuis n'importe où dans le monde sans compromettre la qualité."
+      }
+    },
+    "caseStudy": {
+      "title": "Étude de cas.",
+      "client": "Client",
+      "category": "Catégorie",
+      "year": "Année",
+      "viewProject": "Voir le Projet"
+    },
+    "quote": {
+      "title": "Obtenir un devis.",
+      "subtitle": "Notre temps de réponse moyen est d'une heure.",
+      "company": "Votre Entreprise",
+      "companyPlaceholder": "Nom de l'entreprise",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Jean",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Dupont",
+      "email": "Email Professionnel",
+      "emailPlaceholder": "jean@entreprise.com",
+      "jobTitle": "Fonction",
+      "jobTitlePlaceholder": "Directeur Marketing",
+      "projectType": "Type de Projet",
+      "budget": "Budget",
+      "howHeard": "Comment nous avez-vous connu ?",
+      "message": "Message - Décrivez votre projet",
+      "messagePlaceholder": "Parlez-nous de votre projet...",
+      "selectOption": "Sélectionnez une option",
+      "projectTypes": {
+        "financial": "Communication financière",
+        "corporate": "Vidéo corporate",
+        "brand": "Storytelling de marque",
+        "remote": "Production à distance",
+        "live": "Streaming & événements",
+        "music": "Musique",
+        "other": "Autre"
+      },
+      "budgets": {
+        "notSure": "Je ne sais pas",
+        "under5k": "Moins de 5k€",
+        "5k10k": "5k€ - 10k€",
+        "10k50k": "10k€ - 50k€",
+        "50k100k": "50k€ - 100k€",
+        "100kPlus": "100k€ et plus"
+      },
+      "sources": {
+        "referral": "Recommandation",
+        "search": "Recherche en ligne",
+        "social": "Réseaux sociaux",
+        "event": "Événement",
+        "partner": "Site partenaire",
+        "press": "Article de presse",
+        "other": "Autre"
+      },
+      "submit": "Envoyer",
+      "sending": "Envoi...",
+      "successTitle": "Merci !",
+      "successMessage": "Nous avons bien reçu votre message et vous répondrons dans l'heure."
+    }
+  },
+  "WorkPage": {
+    "metaTitle": "Nos Projets | 8020 Films",
+    "metaDescription": "Découvrez notre portfolio de productions vidéo pour les marques et agences les plus renommées.",
+    "title": "Nos projets.",
+    "subtitle": "Découvrez notre portfolio couvrant le streaming, le storytelling de marque, la musique et la production à distance.",
+    "allFilter": "Tous",
+    "noResults": "Aucun projet trouvé pour cette catégorie."
+  },
+  "WorkReferencePage": {
+    "backToWork": "Retour aux Projets",
+    "client": "Client",
+    "category": "Catégorie",
+    "year": "Année",
+    "ctaTitle": "Envie de travailler ensemble ?",
+    "ctaDescription": "Discutons de la façon dont nous pouvons donner vie à votre vision.",
+    "ctaButton": "Obtenir un Devis"
+  },
+  "QuotePage": {
+    "metaTitle": "Obtenir un Devis | 8020 Films",
+    "metaDescription": "Contactez-nous pour un devis sur votre prochain projet de production vidéo. Notre temps de réponse moyen est d'une heure.",
+    "title": "Créons ensemble.",
+    "intro1": "Avec des équipes sur trois continents dans certaines des villes les plus dynamiques du monde, nous sommes probablement plus proches que vous ne le pensez.",
+    "intro2": "Nous aimons les rencontres en personne où les idées fusent plus librement que le café. Envoyez-nous vos idées et nous vous répondrons avec un devis.",
+    "emailLabel": "Envie d'écrire ?",
+    "formTitle": "Obtenir un Devis"
+  },
+  "CareersPage": {
+    "metaTitle": "Recrutement | 8020 Films",
+    "metaDescription": "Rejoignez notre équipe de cinéastes et professionnels passionnés à Paris, Londres et Los Angeles.",
+    "title": "Rejoignez notre équipe.",
+    "intro1": "Chez 8020 Films, nous recherchons toujours des talents qui partagent notre passion pour la production vidéo d'excellence.",
+    "intro2": "Nous travaillons avec les marques et agences les plus renommées au monde, créant du contenu qui captive les audiences à l'échelle mondiale.",
+    "intro3": "Que vous soyez un professionnel expérimenté ou que vous débutiez votre carrière, nous serions ravis de vous entendre.",
+    "lookingForTitle": "Ce Que Nous Recherchons",
+    "lookingFor1": "Passion pour le storytelling et le contenu visuel",
+    "lookingFor2": "Expérience en production vidéo, streaming ou post-production",
+    "lookingFor3": "Capacité à travailler dans des environnements internationaux dynamiques",
+    "lookingFor4": "Esprit collaboratif et attention aux détails",
+    "contactTitle": "Contactez-nous",
+    "contactDescription": "Envoyez-nous votre CV et portfolio, et dites-nous pourquoi vous seriez un atout pour 8020 Films.",
+    "contactButton": "Nous Écrire"
+  }
+}

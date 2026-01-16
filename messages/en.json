@@ -1,0 +1,158 @@
+{
+  "Metadata": {
+    "title": "8020 Films | Video Production Company",
+    "description": "Based in Paris, London & Los Angeles. Best-in-class video production for the world's most renowned agencies and brands."
+  },
+  "Navigation": {
+    "work": "Work",
+    "careers": "Careers",
+    "getQuote": "Get a Quote"
+  },
+  "Footer": {
+    "tagline": "Best-in-class video production across three continents.",
+    "followUs": "Follow Us",
+    "connect": "Connect",
+    "contactUs": "Contact Us",
+    "login": "Login",
+    "newsletter": "Newsletter",
+    "emailPlaceholder": "Your email",
+    "newsletterSuccess": "Thanks for subscribing!",
+    "allRightsReserved": "All rights reserved."
+  },
+  "HomePage": {
+    "hero": {
+      "description": "Based in Paris, London & Los Angeles we can unlock video production for you anywhere in the world with our teams of vetted, hand-selected crews. Best-in-class content for some of the world's most renowned agencies and brands.",
+      "cta": "Get a Quote"
+    },
+    "work": {
+      "title": "Some of our work.",
+      "viewAll": "View All Our Work"
+    },
+    "capabilities": {
+      "title": "Capabilities.",
+      "scopeBudget": {
+        "title": "Scope & Budget Alignment",
+        "description": "Work with you to define clear project scope and align budgets before production begins. No surprises, just seamless execution."
+      },
+      "fullService": {
+        "title": "Full Service Production",
+        "description": "Source complete crews including DP, lighting, gaffer, makeup, post-production, and animation. Everything you need under one roof."
+      },
+      "liveStreaming": {
+        "title": "Live Streaming & Events",
+        "description": "From festivals and concerts to corporate conferences, we deliver flawless live broadcasts that captivate audiences worldwide."
+      },
+      "music": {
+        "title": "Music",
+        "description": "Music videos, concert films, and artist content that captures the energy and emotion of live performance."
+      },
+      "brandStorytelling": {
+        "title": "Brand Storytelling",
+        "description": "Compelling narratives that connect your brand with audiences through authentic, emotionally resonant visual content."
+      },
+      "remoteProduction": {
+        "title": "Remote Production",
+        "description": "With our connected film kits, supervise shoots remotely from anywhere in the world without compromising on quality."
+      }
+    },
+    "caseStudy": {
+      "title": "Featured case study.",
+      "client": "Client",
+      "category": "Category",
+      "year": "Year",
+      "viewProject": "View Project"
+    },
+    "quote": {
+      "title": "Get a quote.",
+      "subtitle": "Our average reply time is within the hour.",
+      "company": "Your Company",
+      "companyPlaceholder": "Company name",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Doe",
+      "email": "Work Email",
+      "emailPlaceholder": "john@company.com",
+      "jobTitle": "Job Title",
+      "jobTitlePlaceholder": "Marketing Director",
+      "projectType": "Project Type",
+      "budget": "Budget Range",
+      "howHeard": "How did you hear about us?",
+      "message": "Message - What's the brief?",
+      "messagePlaceholder": "Tell us about your project...",
+      "selectOption": "Select an option",
+      "projectTypes": {
+        "financial": "Financial storytelling",
+        "corporate": "Corporate video",
+        "brand": "Brand storytelling",
+        "remote": "Remote production",
+        "live": "Live streaming & events",
+        "music": "Music",
+        "other": "Other"
+      },
+      "budgets": {
+        "notSure": "Not sure",
+        "under5k": "Under $5k",
+        "5k10k": "$5k - $10k",
+        "10k50k": "$10k - $50k",
+        "50k100k": "$50k - $100k",
+        "100kPlus": "$100k and up"
+      },
+      "sources": {
+        "referral": "Referral",
+        "search": "Online search",
+        "social": "Social Media",
+        "event": "Live event",
+        "partner": "Partner website",
+        "press": "Press article",
+        "other": "Other"
+      },
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "successTitle": "Thank You!",
+      "successMessage": "We've received your message and will get back to you within the hour."
+    }
+  },
+  "WorkPage": {
+    "metaTitle": "Our Work | 8020 Films",
+    "metaDescription": "Explore our portfolio of video production projects for world-renowned brands and agencies.",
+    "title": "Our work.",
+    "subtitle": "Discover our portfolio of projects spanning live streaming, brand storytelling, music, and remote production.",
+    "allFilter": "All",
+    "noResults": "No projects found for this category."
+  },
+  "WorkReferencePage": {
+    "backToWork": "Back to Work",
+    "client": "Client",
+    "category": "Category",
+    "year": "Year",
+    "ctaTitle": "Interested in working together?",
+    "ctaDescription": "Let's discuss how we can bring your vision to life.",
+    "ctaButton": "Get a Quote"
+  },
+  "QuotePage": {
+    "metaTitle": "Get a Quote | 8020 Films",
+    "metaDescription": "Contact us for a quote on your next video production project. Our average reply time is within the hour.",
+    "title": "Let's create.",
+    "intro1": "With teams across three continents in some of the world's most vibrant cities, we're probably closer than you think.",
+    "intro2": "We're all about those face-to-face meetings where ideas flow more freely than the coffee. Drop us a line with your ideas and we'll get back to you with a quote.",
+    "emailLabel": "Want to write?",
+    "formTitle": "Get a Quote"
+  },
+  "CareersPage": {
+    "metaTitle": "Careers | 8020 Films",
+    "metaDescription": "Join our team of passionate filmmakers and video production professionals across Paris, London, and Los Angeles.",
+    "title": "Join our team.",
+    "intro1": "At 8020 Films, we're always looking for talented individuals who share our passion for exceptional video production.",
+    "intro2": "We work with some of the world's most renowned brands and agencies, creating content that captivates audiences globally.",
+    "intro3": "Whether you're a seasoned professional or just starting your career, we'd love to hear from you.",
+    "lookingForTitle": "What We Look For",
+    "lookingFor1": "Passion for storytelling and visual content",
+    "lookingFor2": "Experience in video production, live streaming, or post-production",
+    "lookingFor3": "Ability to work in fast-paced, international environments",
+    "lookingFor4": "Collaborative spirit and attention to detail",
+    "contactTitle": "Get in Touch",
+    "contactDescription": "Send us your resume and portfolio, and tell us why you'd be a great fit for 8020 Films.",
+    "contactButton": "Email Us"
+  }
+}
