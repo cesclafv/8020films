@@ -27,6 +27,35 @@ export type Category = {
   display_order: number;
 };
 
+export type ServiceKey = 'liveStreaming' | 'corporateVideo' | 'brandStorytelling' | 'remoteProduction' | 'musicVideo';
+
+export type ServiceImage = {
+  id: string;
+  service_key: ServiceKey;
+  image_url: string;
+  alt_text: string | null;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+};
+
+// Service key mappings
+export const serviceSlugToKey: Record<string, ServiceKey> = {
+  'live-streaming': 'liveStreaming',
+  'corporate-video': 'corporateVideo',
+  'brand-storytelling': 'brandStorytelling',
+  'remote-production': 'remoteProduction',
+  'music-video': 'musicVideo',
+};
+
+export const serviceKeyToDisplayName: Record<ServiceKey, string> = {
+  liveStreaming: 'Live Streaming',
+  corporateVideo: 'Corporate Video',
+  brandStorytelling: 'Brand Storytelling',
+  remoteProduction: 'Remote Production',
+  musicVideo: 'Music Video',
+};
+
 // Fetch all categories
 export async function getCategories(): Promise<Category[]> {
   const supabase = await createClient();
@@ -281,4 +310,23 @@ export async function subscribeToNewsletter(
   }
 
   return { success: true };
+}
+
+// Fetch service images for a specific service
+export async function getServiceImages(serviceKey: ServiceKey): Promise<ServiceImage[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('service_images')
+    .select('*')
+    .eq('service_key', serviceKey)
+    .eq('is_active', true)
+    .order('display_order');
+
+  if (error) {
+    console.error('Error fetching service images:', error);
+    return [];
+  }
+
+  return data || [];
 }

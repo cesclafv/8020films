@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { FAQSection } from './FAQSection';
+import { ServiceImageCarousel } from './ServiceImageCarousel';
 
 type ServiceKey = 'liveStreaming' | 'corporateVideo' | 'brandStorytelling' | 'remoteProduction' | 'musicVideo';
 
@@ -13,6 +14,12 @@ type WorkReference = {
   client_name: string;
   title: string;
   featured_image_url: string | null;
+};
+
+type ServiceImage = {
+  id: string;
+  image_url: string;
+  alt_text: string | null;
 };
 
 const serviceData: Record<ServiceKey, {
@@ -72,11 +79,13 @@ const serviceLinks: Record<ServiceKey, string> = {
 export function ServicePageContent({
   service,
   locale,
-  workReferences = []
+  workReferences = [],
+  serviceImages = []
 }: {
   service: ServiceKey;
   locale: string;
   workReferences?: WorkReference[];
+  serviceImages?: ServiceImage[];
 }) {
   const t = useTranslations('ServicePages');
   const data = serviceData[service];
@@ -85,17 +94,30 @@ export function ServicePageContent({
     <div className="pt-24 pb-20">
       <div className="container mx-auto px-6">
         {/* Hero Section */}
-        <div className="max-w-4xl mb-16">
-          <div className="text-[#ff6b6b] mb-6">{data.icon}</div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-            {t(`${service}.title`)}
-          </h1>
-          <p className="text-xl md:text-2xl text-[#6b7280] mb-8">
-            {t(`${service}.subtitle`)}
-          </p>
-          <p className="text-lg text-[#6b7280]">
-            {t(`${service}.intro`)}
-          </p>
+        <div className={`mb-16 ${serviceImages.length > 0 ? 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-start' : ''}`}>
+          {/* Left Column: Text Content */}
+          <div className="max-w-xl">
+            <div className="text-[#ff6b6b] mb-6">{data.icon}</div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+              {t(`${service}.title`)}
+            </h1>
+            <p className="text-xl md:text-2xl text-[#6b7280] mb-8">
+              {t(`${service}.subtitle`)}
+            </p>
+            <p className="text-lg text-[#6b7280]">
+              {t(`${service}.intro`)}
+            </p>
+          </div>
+
+          {/* Right Column: Image Carousel */}
+          {serviceImages.length > 0 && (
+            <div className="lg:pt-8">
+              <ServiceImageCarousel
+                images={serviceImages}
+                serviceName={t(`${service}.title`)}
+              />
+            </div>
+          )}
         </div>
 
         {/* What We Offer */}
@@ -134,7 +156,7 @@ export function ServicePageContent({
         {workReferences.length > 0 && (
           <div className="mb-20">
             <h2 className="text-2xl font-bold mb-8">
-              {locale === 'fr' ? 'Nos réalisations' : 'Featured Work'}
+              {locale === 'fr' ? 'Nos réalisations' : locale === 'es' ? 'Trabajos destacados' : 'Featured Work'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {workReferences.slice(0, 6).map((work) => (
@@ -172,7 +194,7 @@ export function ServicePageContent({
                 href="/work"
                 className="inline-flex items-center gap-2 text-[#ff6b6b] font-semibold hover:underline"
               >
-                {locale === 'fr' ? 'Voir tous nos projets' : 'View all our work'}
+                {locale === 'fr' ? 'Voir tous nos projets' : locale === 'es' ? 'Ver todos nuestros trabajos' : 'View all our work'}
                 <span>→</span>
               </Link>
             </div>
@@ -182,7 +204,7 @@ export function ServicePageContent({
         {/* Locations */}
         <div className="mb-20">
           <h2 className="text-2xl font-bold mb-6">
-            {locale === 'fr' ? 'Disponible dans nos bureaux' : 'Available at our offices'}
+            {locale === 'fr' ? 'Disponible dans nos bureaux' : locale === 'es' ? 'Disponible en nuestras oficinas' : 'Available at our offices'}
           </h2>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -209,7 +231,7 @@ export function ServicePageContent({
         {/* Related Services */}
         <div className="mb-20">
           <h2 className="text-2xl font-bold mb-6">
-            {locale === 'fr' ? 'Services connexes' : 'Related Services'}
+            {locale === 'fr' ? 'Services connexes' : locale === 'es' ? 'Servicios relacionados' : 'Related Services'}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {data.relatedServices.map((relatedService) => (
@@ -222,7 +244,7 @@ export function ServicePageContent({
                   {t(`${relatedService}.title`)}
                 </h3>
                 <span className="text-sm text-[#ff6b6b]">
-                  {locale === 'fr' ? 'En savoir plus →' : 'Learn more →'}
+                  {locale === 'fr' ? 'En savoir plus →' : locale === 'es' ? 'Más información →' : 'Learn more →'}
                 </span>
               </Link>
             ))}

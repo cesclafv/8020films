@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Header, Footer } from '@/components/marketing';
 import { ServicePageContent } from '@/components/marketing/ServicePageContent';
 import { ServiceJsonLd } from '@/components/seo/JsonLd';
-import { getWorkReferences } from '@/lib/supabase/queries';
+import { getWorkReferences, getServiceImages } from '@/lib/supabase/queries';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -41,7 +41,10 @@ export default async function MusicVideoPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const workReferences = await getWorkReferences(locale, 'music');
+  const [workReferences, serviceImages] = await Promise.all([
+    getWorkReferences(locale, 'music'),
+    getServiceImages('musicVideo'),
+  ]);
 
   return (
     <>
@@ -51,6 +54,7 @@ export default async function MusicVideoPage({ params }: Props) {
           service="musicVideo"
           locale={locale}
           workReferences={workReferences}
+          serviceImages={serviceImages}
         />
       </main>
       <ServiceJsonLd service="musicVideo" />
