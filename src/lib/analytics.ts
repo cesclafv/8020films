@@ -38,6 +38,17 @@ function gtag(
 export type FormLocation = 'homepage' | 'quote_page' | 'contact_page';
 
 /**
+ * Track when the quote form becomes visible in the viewport
+ * Call this when the form section scrolls into view
+ */
+export function trackFormView(formLocation: FormLocation): void {
+  gtag('event', 'form_view', {
+    form_name: 'quote_request',
+    form_location: formLocation,
+  });
+}
+
+/**
  * Track when a user starts interacting with a quote form
  * Call this on the first field interaction (focus)
  */

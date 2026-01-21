@@ -1,15 +1,37 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { trackFormStart, trackGenerateLead, trackFormError } from '@/lib/analytics';
+import { trackFormView, trackFormStart, trackGenerateLead, trackFormError } from '@/lib/analytics';
 
 export function QuoteFormSection() {
   const t = useTranslations('HomePage.quote');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const hasTrackedFormView = useRef(false);
   const hasTrackedFormStart = useRef(false);
+
+  // Track when form section enters viewport
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasTrackedFormView.current) {
+          trackFormView('homepage');
+          hasTrackedFormView.current = true;
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 } // Fire when 25% of the form is visible
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const handleFormInteraction = () => {
     if (!hasTrackedFormStart.current) {
@@ -77,7 +99,7 @@ export function QuoteFormSection() {
   }
 
   return (
-    <section id="quote-section" className="py-20 md:py-28 section-dark">
+    <section ref={sectionRef} id="quote-section" className="py-20 md:py-28 section-dark">
       <div className="container mx-auto px-6">
         {/* Section Header - Centered */}
         <div className="mb-16 md:mb-20 text-center">
