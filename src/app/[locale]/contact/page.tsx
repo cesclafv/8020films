@@ -106,7 +106,7 @@ export default async function ContactPage({ params }: Props) {
             </div>
 
             {/* Right column: Form */}
-            <QuotePageContent />
+            <QuotePageContent formLocation="contact_page" />
           </div>
         </div>
       </main>

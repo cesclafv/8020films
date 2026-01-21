@@ -1,13 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import { trackFormStart, trackGenerateLead, trackFormError } from '@/lib/analytics';
 
 export function QuoteFormSection() {
   const t = useTranslations('HomePage.quote');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hasTrackedFormStart = useRef(false);
+
+  const handleFormInteraction = () => {
+    if (!hasTrackedFormStart.current) {
+      trackFormStart('homepage');
+      hasTrackedFormStart.current = true;
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,8 +47,16 @@ export function QuoteFormSection() {
         throw new Error('Failed to submit');
       }
 
+      // Track successful lead generation
+      trackGenerateLead({
+        formLocation: 'homepage',
+        projectType: data.project_type,
+        budgetRange: data.budget_range,
+      });
+
       setIsSubmitted(true);
     } catch {
+      trackFormError('homepage', 'submission_failed');
       setError('Something went wrong. Please try again or email us directly at hello@8020films.com');
     } finally {
       setIsSubmitting(false);
@@ -71,7 +88,7 @@ export function QuoteFormSection() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
+        <form onSubmit={handleSubmit} onFocus={handleFormInteraction} className="space-y-6 max-w-4xl mx-auto">
           {error && (
             <div className="p-4 bg-red-500/20 border border-red-500/40 text-red-200 rounded">
               {error}

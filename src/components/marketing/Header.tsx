@@ -7,6 +7,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { useParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { locales, localeNames, type Locale } from '@/i18n/config';
+import { trackCTAClick, type CTAType } from '@/lib/analytics';
 
 export function Header() {
   const t = useTranslations('Navigation');
@@ -41,10 +42,18 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { href: '/work', label: t('work') },
-    { href: '/careers', label: t('careers') },
-    { href: '/quote', label: t('getQuote') },
+    { href: '/work', label: t('work'), ctaType: 'work' as CTAType },
+    { href: '/careers', label: t('careers'), ctaType: 'careers' as CTAType },
+    { href: '/quote', label: t('getQuote'), ctaType: 'get_quote' as CTAType },
   ];
+
+  const handleNavClick = (ctaType: CTAType, label: string) => {
+    trackCTAClick({
+      ctaType,
+      ctaLocation: 'header',
+      ctaText: label,
+    });
+  };
 
   const otherLocales = locales.filter((l) => l !== locale);
 
@@ -83,6 +92,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
+              onClick={() => handleNavClick(link.ctaType, link.label)}
               className={cn(
                 'text-white/80 hover:text-white text-sm font-semibold uppercase tracking-wider transition-colors',
                 pathname === link.href && 'text-white'
@@ -201,7 +211,10 @@ export function Header() {
           <Link
             key={link.href}
             href={link.href}
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              handleNavClick(link.ctaType, link.label);
+              setIsMobileMenuOpen(false);
+            }}
             className="text-white text-2xl font-bold uppercase tracking-wider"
           >
             {link.label}

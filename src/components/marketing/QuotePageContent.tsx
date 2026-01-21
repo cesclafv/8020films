@@ -1,13 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import { trackFormStart, trackGenerateLead, trackFormError, type FormLocation } from '@/lib/analytics';
 
-export function QuotePageContent() {
+type QuotePageContentProps = {
+  formLocation?: FormLocation;
+};
+
+export function QuotePageContent({ formLocation = 'quote_page' }: QuotePageContentProps) {
   const t = useTranslations('HomePage.quote');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hasTrackedFormStart = useRef(false);
+
+  const handleFormInteraction = () => {
+    if (!hasTrackedFormStart.current) {
+      trackFormStart(formLocation);
+      hasTrackedFormStart.current = true;
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,8 +51,16 @@ export function QuotePageContent() {
         throw new Error('Failed to submit');
       }
 
+      // Track successful lead generation
+      trackGenerateLead({
+        formLocation,
+        projectType: data.project_type,
+        budgetRange: data.budget_range,
+      });
+
       setIsSubmitted(true);
     } catch {
+      trackFormError(formLocation, 'submission_failed');
       setError('Something went wrong. Please try again or email us directly.');
     } finally {
       setIsSubmitting(false);
@@ -65,7 +86,7 @@ export function QuotePageContent() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} onFocus={handleFormInteraction} className="space-y-6">
         {/* Row 1: Company & Work Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
