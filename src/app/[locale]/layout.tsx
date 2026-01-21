@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale, getMessages } from 'next-intl/server';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { Open_Sans } from 'next/font/google';
+import Script from 'next/script';
 import { locales } from '@/i18n/config';
 import '../globals.css';
 import { Providers } from '@/components/providers/Providers';
@@ -84,6 +85,19 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning className={openSans.variable}>
       <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-6YBQR2824K"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-6YBQR2824K');
+          `}
+        </Script>
         {/* Preconnect to external domains for faster video loading */}
         <link rel="preconnect" href="https://player.vimeo.com" />
         <link rel="preconnect" href="https://www.youtube.com" />
