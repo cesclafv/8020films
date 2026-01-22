@@ -23,11 +23,20 @@ export async function createSupabaseServerClient() {
           return cookieStore.get(name)?.value;
         },
         set(name: string, value: string, options: CookieOptions) {
-          // In some server contexts this may throw; keep usage in handlers/actions when setting cookies.
-          cookieStore.set({ name, value, ...options });
+          // Cookie mutation is only allowed in Server Actions or Route Handlers.
+          // Silently ignore in other contexts (e.g., Server Components).
+          try {
+            cookieStore.set({ name, value, ...options });
+          } catch {
+            // Expected in Server Components - ignore
+          }
         },
         remove(name: string, options: CookieOptions) {
-          cookieStore.set({ name, value: '', ...options, maxAge: 0 });
+          try {
+            cookieStore.set({ name, value: '', ...options, maxAge: 0 });
+          } catch {
+            // Expected in Server Components - ignore
+          }
         },
       },
     },
