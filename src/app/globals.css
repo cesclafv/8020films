@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Custom variant for short viewport heights (< 768px) */
+@custom-variant short (@media (max-height: 767px));
+
 @theme {
   /* Colors */
   --color-background: #ffffff;

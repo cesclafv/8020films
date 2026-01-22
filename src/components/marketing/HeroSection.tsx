@@ -9,7 +9,7 @@ import { Link } from '@/i18n/navigation';
 function LoadingScreen({ isVisible }: { isVisible: boolean }) {
   return (
     <div
-      className={`absolute inset-0 bg-[#0a0a0a] z-[5] flex items-center justify-center transition-opacity duration-1000 ${
+      className={`absolute inset-0 bg-[#0a0a0a] z-[5] flex items-center justify-center pb-24 transition-opacity duration-1000 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
@@ -234,9 +234,9 @@ export function HeroSection() {
       <div className="relative z-20 h-full flex flex-col justify-end pb-24 px-6">
         <div className="container mx-auto">
           <div className="relative max-w-xl">
-            {/* Logo - slides up from behind text box */}
+            {/* Logo - slides up from behind text box (hidden on mobile and short viewports) */}
             <div
-              className={`absolute bottom-full left-0 right-0 mb-6 transition-all duration-1000 ease-out ${
+              className={`hidden md:block short:hidden absolute bottom-full left-0 right-0 mb-6 transition-all duration-1000 ease-out ${
                 showVideo
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-16'
@@ -253,11 +253,11 @@ export function HeroSection() {
             </div>
 
             {/* Text box - higher z-index so logo slides from behind */}
-            <div className="relative z-10 bg-white/95 backdrop-blur-sm p-8 md:p-10">
-              <p className="text-[#1a1a1a] text-lg md:text-xl leading-relaxed mb-6">
+            <div className="relative z-10 bg-white/95 backdrop-blur-sm p-8 md:p-10 short:p-4">
+              <p className="text-[#1a1a1a] text-lg md:text-xl leading-relaxed mb-6 short:text-sm short:mb-3 short:leading-snug">
                 <DescriptionWithLinks text={t('description')} />
               </p>
-              <button onClick={scrollToQuote} className="btn btn-primary">
+              <button onClick={scrollToQuote} className="btn btn-primary short:text-xs short:py-2 short:px-4">
                 {t('cta')}
                 <span className="ml-2">→</span>
               </button>
