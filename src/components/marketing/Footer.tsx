@@ -1,26 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { Link } from '@/i18n/navigation';
 
 export function Footer() {
   const t = useTranslations('Footer');
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+  const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setIsSubmitting(true);
     try {
+      // Execute reCAPTCHA
+      let recaptchaToken = '';
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha('newsletter_form');
+      }
+
       const response = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, recaptcha_token: recaptchaToken }),
       });
 
       if (response.ok) {
@@ -32,7 +40,7 @@ export function Footer() {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [email, executeRecaptcha]);
 
   return (
     <footer className="bg-[#0a0a0a] text-white py-16">

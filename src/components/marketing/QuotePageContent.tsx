@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { trackFormStart, trackGenerateLead, trackFormError, type FormLocation } from '@/lib/analytics';
 
 type QuotePageContentProps = {
@@ -10,6 +11,7 @@ type QuotePageContentProps = {
 
 export function QuotePageContent({ formLocation = 'quote_page' }: QuotePageContentProps) {
   const t = useTranslations('HomePage.quote');
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,10 +24,22 @@ export function QuotePageContent({ formLocation = 'quote_page' }: QuotePageConte
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
+
+    // Execute reCAPTCHA
+    let recaptchaToken = '';
+    if (executeRecaptcha) {
+      try {
+        recaptchaToken = await executeRecaptcha('quote_form');
+      } catch {
+        setError('CAPTCHA verification failed. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+    }
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -38,6 +52,7 @@ export function QuotePageContent({ formLocation = 'quote_page' }: QuotePageConte
       budget_range: formData.get('budget') as string,
       message: formData.get('message') as string,
       how_heard: formData.get('howHeard') as string,
+      recaptcha_token: recaptchaToken,
     };
 
     try {
@@ -65,7 +80,7 @@ export function QuotePageContent({ formLocation = 'quote_page' }: QuotePageConte
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [executeRecaptcha, formLocation]);
 
   if (isSubmitted) {
     return (

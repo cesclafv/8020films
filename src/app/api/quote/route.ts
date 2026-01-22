@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { submitQuoteRequest } from '@/lib/supabase/queries';
 import { sendQuoteNotification } from '@/lib/email';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +22,15 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Add reCAPTCHA validation here
+    // Verify reCAPTCHA token
+    const recaptchaResult = await verifyRecaptcha(body.recaptcha_token);
+    if (!recaptchaResult.success) {
+      console.warn('reCAPTCHA verification failed:', recaptchaResult.error);
+      return NextResponse.json(
+        { error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      );
+    }
 
     const quoteData = {
       company: body.company,

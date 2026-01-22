@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { subscribeToNewsletter } from '@/lib/supabase/queries';
 import { sendNewsletterWelcome } from '@/lib/email';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 export async function POST(request: Request) {
   try {
@@ -9,6 +10,16 @@ export async function POST(request: Request) {
     if (!body.email) {
       return NextResponse.json(
         { error: 'Email is required' },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA token
+    const recaptchaResult = await verifyRecaptcha(body.recaptcha_token);
+    if (!recaptchaResult.success) {
+      console.warn('reCAPTCHA verification failed:', recaptchaResult.error);
+      return NextResponse.json(
+        { error: 'CAPTCHA verification failed. Please try again.' },
         { status: 400 }
       );
     }
