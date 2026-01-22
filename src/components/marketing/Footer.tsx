@@ -191,23 +191,30 @@ export function Footer() {
             {isSubmitted ? (
               <p className="text-green-400 text-sm">{t('newsletterSuccess')}</p>
             ) : (
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t('emailPlaceholder')}
-                  className="input input-dark flex-1 py-2 px-3 text-sm"
-                  required
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-white text-[#0a0a0a] px-4 py-2 text-sm font-semibold hover:bg-white/90 transition-colors disabled:opacity-50"
-                >
-                  {isSubmitting ? '...' : '→'}
-                </button>
-              </form>
+              <>
+                <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t('emailPlaceholder')}
+                    className="input input-dark flex-1 py-2 px-3 text-sm"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-white text-[#0a0a0a] px-4 py-2 text-sm font-semibold hover:bg-white/90 transition-colors disabled:opacity-50"
+                  >
+                    {isSubmitting ? '...' : '→'}
+                  </button>
+                </form>
+                <p className="text-white/40 text-[10px] mt-2 leading-tight">
+                  Protected by reCAPTCHA.{' '}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy</a> &{' '}
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms</a>
+                </p>
+              </>
             )}
           </div>
         </div>

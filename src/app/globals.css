@@ -334,3 +334,8 @@
 .animate-scroll-mobile:hover {
   animation-play-state: paused;
 }
+
+/* Hide reCAPTCHA badge (requires attribution text near forms per Google's terms) */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}

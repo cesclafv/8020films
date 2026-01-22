@@ -44,6 +44,7 @@ export function QuoteFormSection() {
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setIsSubmitting(true);
     setError(null);
 
@@ -59,7 +60,7 @@ export function QuoteFormSection() {
       }
     }
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const data = {
       company: formData.get('company') as string,
       first_name: formData.get('firstName') as string,
@@ -274,6 +275,11 @@ export function QuoteFormSection() {
             >
               {isSubmitting ? t('sending') : t('submit')}
             </button>
+            <p className="text-white/40 text-xs mt-4">
+              This site is protected by reCAPTCHA and the Google{' '}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/60">Privacy Policy</a> and{' '}
+              <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/60">Terms of Service</a> apply.
+            </p>
           </div>
         </form>
       </div>
