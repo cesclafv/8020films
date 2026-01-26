@@ -1,5 +1,5 @@
 const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
-const MIN_SCORE_THRESHOLD = 0.5;
+const MIN_SCORE_THRESHOLD = 0.7; // Increased from 0.5 - bots often score 0.5-0.6
 
 type VerifyResponse = {
   success: boolean;

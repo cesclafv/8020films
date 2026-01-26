@@ -14,6 +14,8 @@ export function QuoteFormSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const hasTrackedFormView = useRef(false);
   const hasTrackedFormStart = useRef(false);
+  // Time-based bot detection - record when form was loaded
+  const formLoadTime = useRef(Date.now());
 
   // Track when form section enters viewport
   useEffect(() => {
@@ -72,6 +74,10 @@ export function QuoteFormSection() {
       message: formData.get('message') as string,
       how_heard: formData.get('howHeard') as string,
       recaptcha_token: recaptchaToken,
+      // Honeypot field - should be empty if human
+      website_url: formData.get('website_url') as string,
+      // Time-based bot detection - how long since form loaded
+      _t: formLoadTime.current,
     };
 
     try {
@@ -82,7 +88,8 @@ export function QuoteFormSection() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to submit');
       }
 
       // Track successful lead generation
@@ -93,9 +100,12 @@ export function QuoteFormSection() {
       });
 
       setIsSubmitted(true);
-    } catch {
+    } catch (err) {
       trackFormError('homepage', 'submission_failed');
-      setError('Something went wrong. Please try again or email us directly at hello@8020films.com');
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      setError(errorMessage === 'Failed to submit'
+        ? 'Something went wrong. Please try again or email us directly at hello@8020films.com'
+        : errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -127,6 +137,17 @@ export function QuoteFormSection() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} onFocus={handleFormInteraction} className="space-y-6 max-w-4xl mx-auto">
+          {/* Honeypot field - hidden from humans, visible to bots */}
+          <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }}>
+            <label htmlFor="website_url">Website URL</label>
+            <input
+              type="text"
+              name="website_url"
+              id="website_url"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
           {error && (
             <div className="p-4 bg-red-500/20 border border-red-500/40 text-red-200 rounded">
               {error}

@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server';
 import { createSupabaseBuildClient } from '@/lib/supabase/server';
 import { revalidateTag } from 'next/cache';
+import { requireAdminAuth, unauthorizedResponse } from '@/lib/admin-auth';
 
-// GET - Read translations from Supabase
+// GET - Read translations from Supabase (protected)
 export async function GET() {
+  // Require admin authentication
+  const auth = await requireAdminAuth();
+  if (!auth.authenticated) {
+    return unauthorizedResponse(auth.error);
+  }
+
   try {
     const supabase = createSupabaseBuildClient();
 
@@ -47,8 +54,14 @@ export async function GET() {
   }
 }
 
-// POST - Save translations to Supabase and revalidate cache
+// POST - Save translations to Supabase and revalidate cache (protected)
 export async function POST(request: Request) {
+  // Require admin authentication
+  const auth = await requireAdminAuth();
+  if (!auth.authenticated) {
+    return unauthorizedResponse(auth.error);
+  }
+
   try {
     const { en, fr, es } = await request.json();
 
