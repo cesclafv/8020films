@@ -117,7 +117,7 @@ export function validateQuoteForm(data: QuoteFormData): ValidationResult {
     validateStringLength(data.first_name, 'First name', 1, 100),
     validateStringLength(data.last_name, 'Last name', 1, 100),
     validateStringLength(data.job_title, 'Job title', 2, 150),
-    validateStringLength(data.message, 'Message', 10, 5000),
+    validateStringLength(data.message, 'Message', 25, 5000),
   ];
 
   for (const result of validations) {
